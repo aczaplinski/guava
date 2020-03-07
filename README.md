@@ -1,5 +1,17 @@
 # Guava: Google Core Libraries for Java
 
+## About this fork
+
+This fork contains annotations describing design patterns used in
+Guava source code. The annotation library is a fork of JPatterns -
+available at https://github.com/aczaplinski/jpatterns. The annotations
+are intended to help understand the source code and prevent future
+bugs related to design pattern implementations.
+
+It requires Java of version at least 11.
+
+## About Guava
+
 [![Latest release](https://img.shields.io/github/release/google/guava.svg)](https://github.com/google/guava/releases/latest)
 [![Build Status](https://travis-ci.org/google/guava.svg?branch=master)](https://travis-ci.org/google/guava)
 
