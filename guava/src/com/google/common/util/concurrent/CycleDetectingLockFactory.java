@@ -43,6 +43,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.AbstractFactoryPattern;
 
 /**
  * The {@code CycleDetectingLockFactory} creates {@link ReentrantLock} instances and {@link
@@ -162,6 +164,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @Beta
 @CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
 @GwtIncompatible
+@AbstractFactoryPattern.ConcreteFactory(validationErrorLevel = ValidationErrorLevel.NONE)
 public class CycleDetectingLockFactory {
 
   /**
@@ -237,6 +240,7 @@ public class CycleDetectingLockFactory {
   }
 
   /** Equivalent to {@code newReentrantLock(lockName, false)}. */
+  @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   public ReentrantLock newReentrantLock(String lockName) {
     return newReentrantLock(lockName, false);
   }
@@ -245,6 +249,7 @@ public class CycleDetectingLockFactory {
    * Creates a {@link ReentrantLock} with the given fairness policy. The {@code lockName} is used in
    * the warning or exception output to help identify the locks involved in the detected deadlock.
    */
+  @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   public ReentrantLock newReentrantLock(String lockName, boolean fair) {
     return policy == Policies.DISABLED
         ? new ReentrantLock(fair)
@@ -252,6 +257,7 @@ public class CycleDetectingLockFactory {
   }
 
   /** Equivalent to {@code newReentrantReadWriteLock(lockName, false)}. */
+  @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   public ReentrantReadWriteLock newReentrantReadWriteLock(String lockName) {
     return newReentrantReadWriteLock(lockName, false);
   }
@@ -261,6 +267,7 @@ public class CycleDetectingLockFactory {
    * is used in the warning or exception output to help identify the locks involved in the detected
    * deadlock.
    */
+  @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   public ReentrantReadWriteLock newReentrantReadWriteLock(String lockName, boolean fair) {
     return policy == Policies.DISABLED
         ? new ReentrantReadWriteLock(fair)
@@ -389,6 +396,7 @@ public class CycleDetectingLockFactory {
    * @param <E> The Enum type representing the explicit lock ordering.
    * @since 13.0
    */
+  @AbstractFactoryPattern.ConcreteFactory(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Beta
   public static final class WithExplicitOrdering<E extends Enum<E>>
       extends CycleDetectingLockFactory {
@@ -402,6 +410,7 @@ public class CycleDetectingLockFactory {
     }
 
     /** Equivalent to {@code newReentrantLock(rank, false)}. */
+    @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
     public ReentrantLock newReentrantLock(E rank) {
       return newReentrantLock(rank, false);
     }
@@ -414,6 +423,7 @@ public class CycleDetectingLockFactory {
      * @throws IllegalStateException If the factory has already created a {@code Lock} with the
      *     specified rank.
      */
+    @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
     public ReentrantLock newReentrantLock(E rank, boolean fair) {
       return policy == Policies.DISABLED
           ? new ReentrantLock(fair)
@@ -421,6 +431,7 @@ public class CycleDetectingLockFactory {
     }
 
     /** Equivalent to {@code newReentrantReadWriteLock(rank, false)}. */
+    @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
     public ReentrantReadWriteLock newReentrantReadWriteLock(E rank) {
       return newReentrantReadWriteLock(rank, false);
     }
@@ -433,6 +444,7 @@ public class CycleDetectingLockFactory {
      * @throws IllegalStateException If the factory has already created a {@code Lock} with the
      *     specified rank.
      */
+    @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
     public ReentrantReadWriteLock newReentrantReadWriteLock(E rank, boolean fair) {
       return policy == Policies.DISABLED
           ? new ReentrantReadWriteLock(fair)
