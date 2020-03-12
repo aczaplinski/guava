@@ -34,6 +34,9 @@ import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@link Multiset} whose contents will never change, with many other important properties
@@ -50,6 +53,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+@BuilderPattern.Product
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
 public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializationDependencies<E>
@@ -454,6 +459,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
    *
    * @since 2.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.ERROR)
   public static class Builder<E> extends ImmutableCollection.Builder<E> {
     final Multiset<E> contents;
 

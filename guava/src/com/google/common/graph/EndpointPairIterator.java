@@ -21,6 +21,9 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -29,6 +32,7 @@ import java.util.Set;
  *
  * @author James Sexton
  */
+@IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 abstract class EndpointPairIterator<N> extends AbstractIterator<EndpointPair<N>> {
   private final BaseGraph<N> graph;
   private final Iterator<N> nodeIterator;
@@ -63,6 +67,7 @@ abstract class EndpointPairIterator<N> extends AbstractIterator<EndpointPair<N>>
    * If the graph is directed, each ordered [source, target] pair will be visited once if there is
    * an edge connecting them.
    */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class Directed<N> extends EndpointPairIterator<N> {
     private Directed(BaseGraph<N> graph) {
       super(graph);
@@ -107,6 +112,7 @@ abstract class EndpointPairIterator<N> extends AbstractIterator<EndpointPair<N>>
    * Visited Nodes = {N1, N2, N3, N4}
    * </pre>
    */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class Undirected<N> extends EndpointPairIterator<N> {
     private Set<N> visitedNodes;
 

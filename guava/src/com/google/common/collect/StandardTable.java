@@ -43,6 +43,8 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * {@link Table} implementation backed by a map that associates row keys with column key / value
@@ -526,6 +528,7 @@ class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializa
       }
     }
 
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private class EntrySetIterator extends AbstractIterator<Entry<R, V>> {
       final Iterator<Entry<R, Map<C, V>>> iterator = backingMap.entrySet().iterator();
 
@@ -712,6 +715,7 @@ class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializa
     return new ColumnKeyIterator();
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private class ColumnKeyIterator extends AbstractIterator<C> {
     // Use the same map type to support TreeMaps with comparators that aren't
     // consistent with equals().

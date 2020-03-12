@@ -15,6 +15,9 @@
 package com.google.common.util.concurrent;
 
 import com.google.errorprone.annotations.DoNotMock;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
@@ -99,6 +102,7 @@ import java.util.concurrent.RejectedExecutionException;
  * @author Nishant Thakkar
  * @since 1.0
  */
+@ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
 @DoNotMock("Use the methods in Futures (like immediateFuture) or SettableFuture")
 public interface ListenableFuture<V> extends Future<V> {
   /**

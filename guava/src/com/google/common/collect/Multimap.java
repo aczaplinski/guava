@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A collection that maps keys to values, similar to {@link Map}, but in which each key may be
@@ -159,6 +160,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+@BuilderPattern.Product
 @DoNotMock("Use ImmutableMultimap, HashMultimap, or another implementation")
 @GwtCompatible
 public interface Multimap<K, V> {

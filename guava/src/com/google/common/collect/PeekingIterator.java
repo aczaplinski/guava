@@ -19,6 +19,9 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotMock;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -32,6 +35,7 @@ import java.util.NoSuchElementException;
  * @author Mick Killianey
  * @since 2.0
  */
+@IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @DoNotMock("Use Iterators.peekingIterator")
 @GwtCompatible
 public interface PeekingIterator<E> extends Iterator<E> {

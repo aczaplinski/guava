@@ -24,6 +24,7 @@ import static com.google.common.graph.Graphs.checkNonNegative;
 import static com.google.common.graph.Graphs.checkPositive;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * Standard implementation of {@link MutableValueGraph} that supports both directed and undirected
@@ -38,6 +39,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
+@BuilderPattern.Product
 final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     implements MutableValueGraph<N, V> {
 

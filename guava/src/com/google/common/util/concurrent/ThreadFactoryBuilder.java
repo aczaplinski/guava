@@ -20,6 +20,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.CheckReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
+
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Locale;
 import java.util.concurrent.Executors;
@@ -43,6 +46,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Kurt Alfred Kluever
  * @since 4.0
  */
+@BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
 @CanIgnoreReturnValue
 @GwtIncompatible
 public final class ThreadFactoryBuilder {

@@ -23,6 +23,10 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
@@ -37,6 +41,8 @@ import java.util.stream.Collectors;
  * @author Jared Levy
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@BuilderPattern.Product
 @GwtCompatible(serializable = true, emulated = true)
 public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<K, V>
     implements BiMap<K, V> {
@@ -166,6 +172,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableBiMapFauxverideShim<
    *
    * @since 2.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.ERROR)
   public static final class Builder<K, V> extends ImmutableMap.Builder<K, V> {
 
     /**

@@ -17,6 +17,9 @@ package com.google.common.collect;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Queue;
@@ -25,6 +28,7 @@ import java.util.Queue;
  * An Iterator implementation which draws elements from a queue, removing them from the queue as it
  * iterates.
  */
+@IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 class ConsumingQueueIterator<T> extends AbstractIterator<T> {
   private final Queue<T> queue;

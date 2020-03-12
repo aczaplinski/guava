@@ -34,6 +34,9 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@link RangeMap} whose contents will never change, with many other important properties
@@ -42,6 +45,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 14.0
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@BuilderPattern.Product
 @Beta
 @GwtIncompatible // NavigableMap
 public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K, V>, Serializable {
@@ -99,6 +104,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
    *
    * @since 14.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   @DoNotMock
   public static final class Builder<K extends Comparable<?>, V> {
     private final List<Entry<Range<K>, V>> entries;

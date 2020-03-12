@@ -23,6 +23,8 @@ import static com.google.common.graph.Graphs.checkNonNegative;
 import com.google.common.annotations.Beta;
 import com.google.common.base.Optional;
 import com.google.errorprone.annotations.DoNotMock;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A builder for constructing instances of {@link MutableGraph} or {@link ImmutableGraph} with
@@ -62,6 +64,7 @@ import com.google.errorprone.annotations.DoNotMock;
  *     constructed based on an existing {@code Graph} using {@link #from(Graph)}.
  * @since 20.0
  */
+@BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @DoNotMock
 public final class GraphBuilder<N> extends AbstractGraphBuilder<N> {

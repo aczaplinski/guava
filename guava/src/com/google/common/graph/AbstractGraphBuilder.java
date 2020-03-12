@@ -17,12 +17,15 @@
 package com.google.common.graph;
 
 import com.google.common.base.Optional;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A base class for builders that construct graphs with user-defined properties.
  *
  * @author James Sexton
  */
+@BuilderPattern.Builder(validationErrorLevel = ValidationErrorLevel.NONE)
 abstract class AbstractGraphBuilder<N> {
   final boolean directed;
   boolean allowsSelfLoops = false;

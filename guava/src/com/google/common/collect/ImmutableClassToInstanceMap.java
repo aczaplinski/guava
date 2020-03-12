@@ -25,6 +25,9 @@ import com.google.errorprone.annotations.Immutable;
 import java.io.Serializable;
 import java.util.Map;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@link ClassToInstanceMap} whose contents will never change, with many other important
@@ -33,6 +36,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@BuilderPattern.Product
 @Immutable(containerOf = "B")
 @GwtIncompatible
 public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? extends B>, B>
@@ -86,6 +91,7 @@ public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<? 
    *
    * @since 2.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   public static final class Builder<B> {
     private final ImmutableMap.Builder<Class<? extends B>, B> mapBuilder = ImmutableMap.builder();
 

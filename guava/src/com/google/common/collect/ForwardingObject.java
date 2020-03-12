@@ -17,6 +17,9 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.io.Serializable;
 
 /**
@@ -43,6 +46,7 @@ import java.io.Serializable;
  * @author Mike Bostock
  * @since 2.0
  */
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public abstract class ForwardingObject {
 

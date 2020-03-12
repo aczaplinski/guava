@@ -32,6 +32,8 @@ import java.util.function.LongConsumer;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /** Spliterator utilities for {@code common.collect} internals. */
 @GwtCompatible
@@ -50,6 +52,7 @@ final class CollectSpliterators {
     if (comparator != null) {
       checkArgument((extraCharacteristics & Spliterator.SORTED) != 0);
     }
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.NONE)
     class WithCharacteristics implements Spliterator<T> {
       private final Spliterator.OfInt delegate;
 
@@ -288,6 +291,7 @@ final class CollectSpliterators {
    * @param <OutElementT> the element type of the output spliterators
    * @param <OutSpliteratorT> the type of the output spliterators
    */
+  @IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class FlatMapSpliterator<
           InElementT, OutElementT, OutSpliteratorT extends Spliterator<OutElementT>>
       implements Spliterator<OutElementT> {
@@ -414,6 +418,7 @@ final class CollectSpliterators {
    * @param <InElementT> the element type of the input spliterator
    * @param <OutElementT> the element type of the output spliterators
    */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class FlatMapSpliteratorOfObject<InElementT, OutElementT>
       extends FlatMapSpliterator<InElementT, OutElementT, Spliterator<OutElementT>> {
     FlatMapSpliteratorOfObject(
@@ -435,6 +440,7 @@ final class CollectSpliterators {
    * @param <OutConsumerT> the specialized consumer type for the primitive output type
    * @param <OutSpliteratorT> the primitive spliterator type associated with {@code OutElementT}
    */
+  @IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class FlatMapSpliteratorOfPrimitive<
           InElementT,
           OutElementT,
@@ -489,6 +495,7 @@ final class CollectSpliterators {
   }
 
   /** Implementation of {@link #flatMapToInt}. */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class FlatMapSpliteratorOfInt<InElementT>
       extends FlatMapSpliteratorOfPrimitive<InElementT, Integer, IntConsumer, Spliterator.OfInt>
       implements Spliterator.OfInt {
@@ -503,6 +510,7 @@ final class CollectSpliterators {
   }
 
   /** Implementation of {@link #flatMapToLong}. */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class FlatMapSpliteratorOfLong<InElementT>
       extends FlatMapSpliteratorOfPrimitive<InElementT, Long, LongConsumer, Spliterator.OfLong>
       implements Spliterator.OfLong {
@@ -517,6 +525,7 @@ final class CollectSpliterators {
   }
 
   /** Implementation of {@link #flatMapToDouble}. */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class FlatMapSpliteratorOfDouble<InElementT>
       extends FlatMapSpliteratorOfPrimitive<
           InElementT, Double, DoubleConsumer, Spliterator.OfDouble>

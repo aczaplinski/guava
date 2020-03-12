@@ -30,12 +30,15 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A skeleton {@code Multimap} implementation, not necessarily in terms of a {@code Map}.
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
   @Override
@@ -117,6 +120,7 @@ abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
 
   abstract Collection<Entry<K, V>> createEntries();
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class Entries extends Multimaps.Entries<K, V> {
     @Override
@@ -135,6 +139,7 @@ abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class EntrySet extends Entries implements Set<Entry<K, V>> {
     @Override
@@ -185,6 +190,7 @@ abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
 
   abstract Collection<V> createValues();
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class Values extends AbstractCollection<V> {
     @Override

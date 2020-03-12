@@ -25,6 +25,7 @@ import static com.google.common.graph.GraphConstants.SELF_LOOPS_NOT_ALLOWED;
 
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * Standard implementation of {@link MutableNetwork} that supports both directed and undirected
@@ -39,6 +40,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
+@BuilderPattern.Product
 final class StandardMutableNetwork<N, E> extends StandardNetwork<N, E>
     implements MutableNetwork<N, E> {
 

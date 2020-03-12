@@ -19,6 +19,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,6 +35,7 @@ import java.util.Map.Entry;
  * @author Sven Mawson
  * @since 15.0
  */
+@BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
 @Beta
 @GwtCompatible
 public final class CharEscaperBuilder {
@@ -39,6 +43,7 @@ public final class CharEscaperBuilder {
    * Simple decorator that turns an array of replacement char[]s into a CharEscaper, this results in
    * a very fast escape method.
    */
+  @BuilderPattern.Product
   private static class CharArrayDecorator extends CharEscaper {
     private final char[][] replacements;
     private final int replaceLength;

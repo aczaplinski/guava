@@ -69,6 +69,9 @@ import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Static utility methods pertaining to {@link Map} instances (including instances of {@link
@@ -3476,6 +3479,7 @@ public final class Maps {
    * {@code AbstractMap} extension that makes it easy to cache customized keySet, values, and
    * entrySet views.
    */
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtCompatible
   abstract static class ViewCachingAbstractMap<K, V> extends AbstractMap<K, V> {
     /**
@@ -3517,6 +3521,7 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   abstract static class IteratorBasedAbstractMap<K, V> extends AbstractMap<K, V> {
     @Override
     public abstract int size();
@@ -3681,6 +3686,8 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class KeySet<K, V> extends Sets.ImprovedAbstractSet<K> {
     @Weak final Map<K, V> map;
 
@@ -3742,6 +3749,8 @@ public final class Maps {
     return (entry == null) ? null : entry.getValue();
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class SortedKeySet<K, V> extends KeySet<K, V> implements SortedSet<K> {
     SortedKeySet(SortedMap<K, V> map) {
       super(map);
@@ -3783,6 +3792,8 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableMap
   static class NavigableKeySet<K, V> extends SortedKeySet<K, V> implements NavigableSet<K> {
     NavigableKeySet(NavigableMap<K, V> map) {
@@ -3866,6 +3877,8 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class Values<K, V> extends AbstractCollection<V> {
     @Weak final Map<K, V> map;
 
@@ -3955,6 +3968,7 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   abstract static class EntrySet<K, V> extends Sets.ImprovedAbstractSet<Entry<K, V>> {
     abstract Map<K, V> map();
 
@@ -4021,6 +4035,8 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableMap
   abstract static class DescendingMap<K, V> extends ForwardingMap<K, V>
       implements NavigableMap<K, V> {

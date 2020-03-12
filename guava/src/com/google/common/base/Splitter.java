@@ -20,6 +20,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -537,6 +540,7 @@ public final class Splitter {
     Iterator<String> iterator(Splitter splitter, CharSequence toSplit);
   }
 
+  @IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private abstract static class SplittingIterator extends AbstractIterator<String> {
     final CharSequence toSplit;
     final CharMatcher trimmer;

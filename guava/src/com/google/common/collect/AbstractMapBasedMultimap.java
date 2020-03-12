@@ -43,6 +43,9 @@ import java.util.SortedSet;
 import java.util.Spliterator;
 import java.util.function.BiConsumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Basic implementation of the {@link Multimap} interface. This class represents a multimap as a map
@@ -319,6 +322,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
    * subcollection {@code refreshIfEmpty}, {@code removeIfEmpty}, and {@code addToMap} methods call
    * the corresponding methods of the full wrapped collection.
    */
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class WrappedCollection extends AbstractCollection<V> {
     final @Nullable K key;
@@ -429,6 +434,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
 
     /** Collection iterator for {@code WrappedCollection}. */
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.NONE)
     class WrappedIterator implements Iterator<V> {
       final Iterator<V> delegateIterator;
       final Collection<V> originalDelegate = delegate;
@@ -583,6 +589,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
   }
 
   /** Set decorator that stays in sync with the multimap values for a key. */
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class WrappedSet extends WrappedCollection implements Set<V> {
     WrappedSet(@Nullable K key, Set<V> delegate) {
@@ -610,6 +618,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
   }
 
   /** SortedSet decorator that stays in sync with the multimap values for a key. */
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class WrappedSortedSet extends WrappedCollection implements SortedSet<V> {
     WrappedSortedSet(@Nullable K key, SortedSet<V> delegate, @Nullable WrappedCollection ancestor) {
@@ -665,6 +675,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
   }
 
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class WrappedNavigableSet extends WrappedSortedSet implements NavigableSet<V> {
     WrappedNavigableSet(
@@ -740,6 +752,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
   }
 
   /** List decorator that stays in sync with the multimap values for a key. */
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   class WrappedList extends WrappedCollection implements List<V> {
     WrappedList(@Nullable K key, List<V> delegate, @Nullable WrappedCollection ancestor) {
@@ -833,6 +847,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
 
     /** ListIterator decorator. */
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private class WrappedListIterator extends WrappedIterator implements ListIterator<V> {
       WrappedListIterator() {}
 
@@ -885,6 +900,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
    * List decorator that stays in sync with the multimap values for a key and supports rapid random
    * access.
    */
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   private class RandomAccessWrappedList extends WrappedList implements RandomAccess {
     RandomAccessWrappedList(
         @Nullable K key, List<V> delegate, @Nullable WrappedCollection ancestor) {
@@ -1280,6 +1297,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   private class AsMap extends ViewCachingAbstractMap<K, Collection<V>> {
     /**
@@ -1368,6 +1387,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
       return Maps.immutableEntry(key, wrapCollection(key, entry.getValue()));
     }
 
+    @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
     @WeakOuter
     class AsMapEntries extends Maps.EntrySet<K, Collection<V>> {
       @Override
@@ -1404,6 +1424,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
 
     /** Iterator across all keys and value collections. */
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.NONE)
     class AsMapIterator implements Iterator<Entry<K, Collection<V>>> {
       final Iterator<Entry<K, Collection<V>>> delegateIterator = submap.entrySet().iterator();
       @Nullable Collection<V> collection;
@@ -1431,6 +1452,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @WeakOuter
   private class SortedAsMap extends AsMap implements SortedMap<K, Collection<V>> {
     SortedAsMap(SortedMap<K, Collection<V>> submap) {
@@ -1487,6 +1510,8 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   class NavigableAsMap extends SortedAsMap implements NavigableMap<K, Collection<V>> {
 
     NavigableAsMap(NavigableMap<K, Collection<V>> submap) {

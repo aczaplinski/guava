@@ -38,6 +38,9 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.function.BiConsumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@link Multimap} whose contents will never change, with many other important properties
@@ -65,6 +68,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@BuilderPattern.Product
 @GwtCompatible(emulated = true)
 public abstract class ImmutableMultimap<K, V> extends BaseImmutableMultimap<K, V>
     implements Serializable {
@@ -138,6 +143,7 @@ public abstract class ImmutableMultimap<K, V> extends BaseImmutableMultimap<K, V
    *
    * @since 2.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   @DoNotMock
   public static class Builder<K, V> {
     Map<K, Collection<V>> builderMap;

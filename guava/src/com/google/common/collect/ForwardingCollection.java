@@ -22,6 +22,9 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
 import java.util.Iterator;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A collection which forwards all its method calls to another collection. Subclasses should
@@ -45,6 +48,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public abstract class ForwardingCollection<E> extends ForwardingObject implements Collection<E> {
   // TODO(lowasser): identify places where thread safety is actually lost

@@ -23,6 +23,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A sorted set which forwards all its method calls to another sorted set. Subclasses should
@@ -51,6 +54,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public abstract class ForwardingSortedSet<E> extends ForwardingSet<E> implements SortedSet<E> {
 

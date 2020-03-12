@@ -21,6 +21,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
@@ -138,6 +141,7 @@ public abstract class TreeTraverser<T> {
     return new PreOrderIterator(root);
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private final class PreOrderIterator extends UnmodifiableIterator<T> {
     private final Deque<Iterator<T>> stack;
 
@@ -213,6 +217,7 @@ public abstract class TreeTraverser<T> {
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private final class PostOrderIterator extends AbstractIterator<T> {
     private final ArrayDeque<PostOrderNode<T>> stack;
 
@@ -262,6 +267,7 @@ public abstract class TreeTraverser<T> {
     };
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private final class BreadthFirstIterator extends UnmodifiableIterator<T>
       implements PeekingIterator<T> {
     private final Queue<T> queue;

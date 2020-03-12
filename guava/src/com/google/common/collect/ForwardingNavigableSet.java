@@ -18,6 +18,10 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.Iterator;
 import java.util.NavigableSet;
 import java.util.SortedSet;
@@ -48,6 +52,8 @@ import java.util.SortedSet;
  * @author Louis Wasserman
  * @since 12.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtIncompatible
 public abstract class ForwardingNavigableSet<E> extends ForwardingSortedSet<E>
     implements NavigableSet<E> {

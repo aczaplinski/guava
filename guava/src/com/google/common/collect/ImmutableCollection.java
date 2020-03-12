@@ -32,6 +32,9 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@link Collection} whose contents will never change, and which offers a few additional
@@ -158,6 +161,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@BuilderPattern.Product
 @DoNotMock("Use ImmutableList.of or another implementation")
 @GwtCompatible(emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
@@ -373,6 +378,7 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
    *
    * @since 10.0
    */
+  @BuilderPattern.Builder(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DoNotMock
   public abstract static class Builder<E> {
     static final int DEFAULT_INITIAL_CAPACITY = 4;

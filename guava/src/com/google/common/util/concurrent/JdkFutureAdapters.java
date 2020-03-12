@@ -19,6 +19,10 @@ import static com.google.common.util.concurrent.Uninterruptibles.getUninterrupti
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+import org.jpatterns.gof.structural.AdapterPattern;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -93,6 +97,8 @@ public final class JdkFutureAdapters {
    * <p>If the delegate future is interrupted or throws an unexpected unchecked exception, the
    * listeners will not be invoked.
    */
+  @AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @ObserverPattern.ConcreteSubject(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class ListenableFutureAdapter<V> extends ForwardingFuture<V>
       implements ListenableFuture<V> {
 

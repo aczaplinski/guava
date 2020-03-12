@@ -38,6 +38,9 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Provides static methods for working with {@code Collection} instances.
@@ -119,6 +122,8 @@ public final class Collections2 {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class FilteredCollection<E> extends AbstractCollection<E> {
     final Collection<E> unfiltered;
     final Predicate<? super E> predicate;
@@ -261,6 +266,7 @@ public final class Collections2 {
     return new TransformedCollection<>(fromCollection, function);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   static class TransformedCollection<F, T> extends AbstractCollection<T> {
     final Collection<F> fromCollection;
     final Function<? super F, ? extends T> function;
@@ -437,6 +443,7 @@ public final class Collections2 {
     return new OrderedPermutationCollection<E>(elements, comparator);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class OrderedPermutationCollection<E> extends AbstractCollection<List<E>> {
     final ImmutableList<E> inputList;
     final Comparator<? super E> comparator;
@@ -508,6 +515,7 @@ public final class Collections2 {
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class OrderedPermutationIterator<E> extends AbstractIterator<List<E>> {
     @Nullable List<E> nextPermutation;
     final Comparator<? super E> comparator;
@@ -582,6 +590,7 @@ public final class Collections2 {
     return new PermutationCollection<E>(ImmutableList.copyOf(elements));
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class PermutationCollection<E> extends AbstractCollection<List<E>> {
     final ImmutableList<E> inputList;
 
@@ -619,6 +628,7 @@ public final class Collections2 {
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class PermutationIterator<E> extends AbstractIterator<List<E>> {
     final List<E> list;
     final int[] c;

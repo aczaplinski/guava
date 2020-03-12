@@ -18,6 +18,7 @@ package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A subinterface of {@link Graph} which adds mutation methods. When mutation is not required, users
@@ -28,6 +29,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * @param <N> Node parameter type
  * @since 20.0
  */
+@BuilderPattern.Product
 @Beta
 public interface MutableGraph<N> extends Graph<N> {
 

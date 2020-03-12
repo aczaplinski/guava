@@ -17,6 +17,8 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A dummy superclass to support GWT serialization of the element type of an {@link
@@ -36,5 +38,6 @@ import com.google.common.annotations.GwtCompatible;
  * anyway, since it doesn't require us to declare dummy methods (though occasionally constructors)
  * and make types non-final.
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible(emulated = true)
 abstract class ImmutableMultisetGwtSerializationDependencies<E> extends ImmutableCollection<E> {}

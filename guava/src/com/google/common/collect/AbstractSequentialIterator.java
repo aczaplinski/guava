@@ -19,6 +19,8 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import java.util.NoSuchElementException;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * This class provides a skeletal implementation of the {@code Iterator} interface for sequences
@@ -39,6 +41,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Chris Povirk
  * @since 12.0 (in Guava as {@code AbstractLinkedIterator} since 8.0)
  */
+@IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class AbstractSequentialIterator<T> extends UnmodifiableIterator<T> {
   private @Nullable T nextOrNull;

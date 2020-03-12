@@ -86,6 +86,7 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * The concurrent hash map implementation built by {@link CacheBuilder}.
@@ -4847,6 +4848,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @BuilderPattern.Product
   static class LocalManualCache<K, V> implements Cache<K, V>, Serializable {
     final LocalCache<K, V> localCache;
 

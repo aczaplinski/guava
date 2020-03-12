@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@code Multimap} that can hold duplicate key-value pairs and that maintains the insertion
@@ -39,6 +40,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+@BuilderPattern.Product
 @GwtCompatible
 public interface ListMultimap<K, V> extends Multimap<K, V> {
   /**

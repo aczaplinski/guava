@@ -53,6 +53,9 @@ import java.util.function.Consumer;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * Provides static methods acting on or generating a {@code Multimap}.
@@ -327,6 +330,7 @@ public final class Multimaps {
     return new CustomListMultimap<>(map, factory);
   }
 
+  @BuilderPattern.Product
   private static class CustomListMultimap<K, V> extends AbstractListMultimap<K, V> {
     transient Supplier<? extends List<V>> factory;
 
@@ -405,6 +409,7 @@ public final class Multimaps {
     return new CustomSetMultimap<>(map, factory);
   }
 
+  @BuilderPattern.Product
   private static class CustomSetMultimap<K, V> extends AbstractSetMultimap<K, V> {
     transient Supplier<? extends Set<V>> factory;
 
@@ -1782,6 +1787,7 @@ public final class Multimaps {
   }
 
   /** A skeleton implementation of {@link Multimap#entries()}. */
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   abstract static class Entries<K, V> extends AbstractCollection<Map.Entry<K, V>> {
     abstract Multimap<K, V> multimap();
 

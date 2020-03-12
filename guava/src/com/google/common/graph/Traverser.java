@@ -31,6 +31,8 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An object that can traverse the nodes that are reachable from a specified (set of) start node(s)
@@ -398,6 +400,7 @@ public abstract class Traverser<N> {
       graph.successors(startNode);
     }
 
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private final class BreadthFirstIterator extends UnmodifiableIterator<N> {
       private final Queue<N> queue = new ArrayDeque<>();
       private final Set<N> visited = new HashSet<>();
@@ -428,6 +431,7 @@ public abstract class Traverser<N> {
       }
     }
 
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private final class DepthFirstIterator extends AbstractIterator<N> {
       private final Deque<NodeAndSuccessors> stack = new ArrayDeque<>();
       private final Set<N> visited = new HashSet<>();
@@ -564,6 +568,7 @@ public abstract class Traverser<N> {
       tree.successors(startNode);
     }
 
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private final class BreadthFirstIterator extends UnmodifiableIterator<N> {
       private final Queue<N> queue = new ArrayDeque<>();
 
@@ -586,6 +591,7 @@ public abstract class Traverser<N> {
       }
     }
 
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private final class DepthFirstPreOrderIterator extends UnmodifiableIterator<N> {
       private final Deque<Iterator<? extends N>> stack = new ArrayDeque<>();
 
@@ -613,6 +619,7 @@ public abstract class Traverser<N> {
       }
     }
 
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     private final class DepthFirstPostOrderIterator extends AbstractIterator<N> {
       private final ArrayDeque<NodeAndChildren> stack = new ArrayDeque<>();
 

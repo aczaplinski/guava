@@ -22,6 +22,9 @@ import com.google.common.annotations.GwtCompatible;
 import java.util.Collection;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A set which forwards all its method calls to another set. Subclasses should override one or more
@@ -45,6 +48,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public abstract class ForwardingSet<E> extends ForwardingCollection<E> implements Set<E> {
   // TODO(lowasser): identify places where thread safety is actually lost

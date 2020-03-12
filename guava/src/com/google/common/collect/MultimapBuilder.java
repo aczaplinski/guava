@@ -21,6 +21,9 @@ import static com.google.common.collect.CollectPreconditions.checkNonnegative;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Supplier;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -60,6 +63,7 @@ import java.util.TreeSet;
  * @param <V0> An upper bound on the value type of the generated multimap.
  * @since 16.0
  */
+@BuilderPattern.Builder(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class MultimapBuilder<K0, V0> {
   /*
@@ -416,6 +420,7 @@ public abstract class MultimapBuilder<K0, V0> {
    *
    * @since 16.0
    */
+  @BuilderPattern.Builder(validationErrorLevel = ValidationErrorLevel.ERROR)
   public abstract static class ListMultimapBuilder<K0, V0> extends MultimapBuilder<K0, V0> {
     ListMultimapBuilder() {}
 
@@ -434,6 +439,7 @@ public abstract class MultimapBuilder<K0, V0> {
    *
    * @since 16.0
    */
+  @BuilderPattern.Builder(validationErrorLevel = ValidationErrorLevel.ERROR)
   public abstract static class SetMultimapBuilder<K0, V0> extends MultimapBuilder<K0, V0> {
     SetMultimapBuilder() {}
 
@@ -452,6 +458,7 @@ public abstract class MultimapBuilder<K0, V0> {
    *
    * @since 16.0
    */
+  @BuilderPattern.Builder(validationErrorLevel = ValidationErrorLevel.ERROR)
   public abstract static class SortedSetMultimapBuilder<K0, V0> extends SetMultimapBuilder<K0, V0> {
     SortedSetMultimapBuilder() {}
 

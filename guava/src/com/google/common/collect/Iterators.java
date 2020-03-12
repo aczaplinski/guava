@@ -46,6 +46,8 @@ import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * This class contains static utility methods that operate on or return objects of type {@link
@@ -1022,6 +1024,7 @@ public final class Iterators {
     return new ArrayItr<T>(array, offset, length, index);
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class ArrayItr<T> extends AbstractIndexedListIterator<T> {
     static final UnmodifiableListIterator<Object> EMPTY = new ArrayItr<>(new Object[0], 0, 0, 0);
 
@@ -1242,6 +1245,7 @@ public final class Iterators {
    * iterators. (Retrieving all elements takes approximately O(N*log(M)) time, where N is the total
    * number of elements.)
    */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class MergingIterator<T> extends UnmodifiableIterator<T> {
     final Queue<PeekingIterator<T>> queue;
 

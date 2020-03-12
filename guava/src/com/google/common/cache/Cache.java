@@ -25,6 +25,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A semi-persistent mapping from keys to values. Cache entries are manually added using {@link
@@ -37,6 +38,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Charles Fry
  * @since 10.0
  */
+@BuilderPattern.Product
 @DoNotMock("Use CacheBuilder.newBuilder().build()")
 @GwtCompatible
 public interface Cache<K, V> {

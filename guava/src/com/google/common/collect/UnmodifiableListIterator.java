@@ -17,6 +17,9 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.ListIterator;
 
 /**
@@ -25,6 +28,7 @@ import java.util.ListIterator;
  * @since 7.0
  * @author Louis Wasserman
  */
+@IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class UnmodifiableListIterator<E> extends UnmodifiableIterator<E>
     implements ListIterator<E> {

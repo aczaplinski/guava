@@ -52,6 +52,10 @@ import java.util.function.Consumer;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+import org.jpatterns.gof.structural.ProxyPattern;
 
 /**
  * Static utility methods pertaining to {@link Set} instances. Also see this class's counterparts
@@ -73,6 +77,7 @@ public final class Sets {
    * {@link AbstractSet} substitute without the potentially-quadratic {@code removeAll}
    * implementation.
    */
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   abstract static class ImprovedAbstractSet<E> extends AbstractSet<E> {
     @Override
     public boolean removeAll(Collection<?> c) {
@@ -582,6 +587,8 @@ public final class Sets {
    *
    * @since 2.0
    */
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   public abstract static class SetView<E> extends AbstractSet<E> {
     private SetView() {} // no subclasses but our own
 
@@ -1133,6 +1140,7 @@ public final class Sets {
     return new FilteredNavigableSet<E>(checkNotNull(unfiltered), checkNotNull(predicate));
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
     FilteredSet(Set<E> unfiltered, Predicate<? super E> predicate) {
       super(unfiltered, predicate);
@@ -1149,6 +1157,7 @@ public final class Sets {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class FilteredSortedSet<E> extends FilteredSet<E> implements SortedSet<E> {
 
     FilteredSortedSet(SortedSet<E> unfiltered, Predicate<? super E> predicate) {
@@ -1194,6 +1203,7 @@ public final class Sets {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableSet
   private static class FilteredNavigableSet<E> extends FilteredSortedSet<E>
       implements NavigableSet<E> {
@@ -1383,6 +1393,8 @@ public final class Sets {
     return cartesianProduct(Arrays.asList(sets));
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class CartesianSet<E> extends ForwardingCollection<List<E>>
       implements Set<List<E>> {
     private final transient ImmutableList<ImmutableSet<E>> axes;
@@ -1491,6 +1503,8 @@ public final class Sets {
     return new PowerSet<E>(set);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class SubSet<E> extends AbstractSet<E> {
     private final ImmutableMap<E, Integer> inputSet;
     private final int mask;
@@ -1535,6 +1549,7 @@ public final class Sets {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class PowerSet<E> extends AbstractSet<Set<E>> {
     final ImmutableMap<E, Integer> inputSet;
 
@@ -1770,6 +1785,8 @@ public final class Sets {
     return new UnmodifiableNavigableSet<E>(set);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static final class UnmodifiableNavigableSet<E> extends ForwardingSortedSet<E>
       implements NavigableSet<E>, Serializable {
     private final NavigableSet<E> delegate;
@@ -1952,6 +1969,8 @@ public final class Sets {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableSet
   static class DescendingSet<E> extends ForwardingNavigableSet<E> {
     private final NavigableSet<E> forward;

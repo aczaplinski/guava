@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@code SetMultimap} whose set of values for a given key are kept sorted; that is, they comprise
@@ -44,6 +45,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+@BuilderPattern.Product
 @GwtCompatible
 public interface SortedSetMultimap<K, V> extends SetMultimap<K, V> {
   // Following Javadoc copied from Multimap.
