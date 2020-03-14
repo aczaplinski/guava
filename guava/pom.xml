@@ -42,10 +42,17 @@
       <groupId>com.google.j2objc</groupId>
       <artifactId>j2objc-annotations</artifactId>
     </dependency>
+    <!-- Currently, for this dependency to work, it should be downloaded from its repository
+     (aczaplinski fork of jpatterns) and built:
+     mvn package
+     Then it should be installed into the local repository:
+     mvn install:install-file -Dfile=jpatterns-0.1.0.jar -DgroupId=org.jpatterns -DartifactId=jpatterns \
+     -Dversion=0.1.0 -Dpackaging=jar -DgeneratePom=true
+     -->
     <dependency>
       <groupId>org.jpatterns</groupId>
       <artifactId>jpatterns</artifactId>
-      <version>0.0.1</version>
+      <version>0.1.0</version>
       <scope>compile</scope>
     </dependency>
     <!-- TODO(cpovirk): does this comment belong on the <dependency> in <profiles>? -->
