@@ -3749,7 +3749,7 @@ public final class Maps {
     return (entry == null) ? null : entry.getValue();
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class SortedKeySet<K, V> extends KeySet<K, V> implements SortedSet<K> {
     SortedKeySet(SortedMap<K, V> map) {
@@ -3792,7 +3792,7 @@ public final class Maps {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableMap
   static class NavigableKeySet<K, V> extends SortedKeySet<K, V> implements NavigableSet<K> {
@@ -3968,7 +3968,7 @@ public final class Maps {
     }
   }
 
-  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class EntrySet<K, V> extends Sets.ImprovedAbstractSet<Entry<K, V>> {
     abstract Map<K, V> map();
 

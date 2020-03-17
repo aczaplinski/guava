@@ -25,6 +25,8 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.function.BiFunction;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A mapping from disjoint nonempty ranges to non-null values. Queries look up the value associated
@@ -36,6 +38,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 14.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
 @Beta
 @DoNotMock("Use ImmutableRangeMap or TreeRangeMap")
 @GwtIncompatible

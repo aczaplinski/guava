@@ -77,7 +77,7 @@ public final class Sets {
    * {@link AbstractSet} substitute without the potentially-quadratic {@code removeAll}
    * implementation.
    */
-  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class ImprovedAbstractSet<E> extends AbstractSet<E> {
     @Override
     public boolean removeAll(Collection<?> c) {
@@ -587,7 +587,7 @@ public final class Sets {
    *
    * @since 2.0
    */
-  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   public abstract static class SetView<E> extends AbstractSet<E> {
     private SetView() {} // no subclasses but our own
@@ -1140,7 +1140,7 @@ public final class Sets {
     return new FilteredNavigableSet<E>(checkNotNull(unfiltered), checkNotNull(predicate));
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class FilteredSet<E> extends FilteredCollection<E> implements Set<E> {
     FilteredSet(Set<E> unfiltered, Predicate<? super E> predicate) {
       super(unfiltered, predicate);
@@ -1157,7 +1157,7 @@ public final class Sets {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class FilteredSortedSet<E> extends FilteredSet<E> implements SortedSet<E> {
 
     FilteredSortedSet(SortedSet<E> unfiltered, Predicate<? super E> predicate) {
@@ -1393,7 +1393,7 @@ public final class Sets {
     return cartesianProduct(Arrays.asList(sets));
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class CartesianSet<E> extends ForwardingCollection<List<E>>
       implements Set<List<E>> {

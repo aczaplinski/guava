@@ -38,6 +38,6 @@ import org.jpatterns.gof.behavioral.IteratorPattern;
  * anyway, since it doesn't require us to declare dummy methods (though occasionally constructors)
  * and make types non-final.
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 abstract class ImmutableMultisetGwtSerializationDependencies<E> extends ImmutableCollection<E> {}

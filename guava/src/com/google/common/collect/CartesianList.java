@@ -31,7 +31,7 @@ import org.jpatterns.gof.behavioral.IteratorPattern;
  *
  * @author Louis Wasserman
  */
-@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 final class CartesianList<E> extends AbstractList<List<E>> implements RandomAccess {
 

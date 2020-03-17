@@ -54,7 +54,7 @@ import org.jpatterns.gof.structural.DecoratorPattern;
  * @author Louis Wasserman
  * @since 2.0
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public abstract class ForwardingSortedSet<E> extends ForwardingSet<E> implements SortedSet<E> {

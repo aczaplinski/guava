@@ -139,7 +139,7 @@ abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   class EntrySet extends Entries implements Set<Entry<K, V>> {
     @Override

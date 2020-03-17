@@ -1787,7 +1787,7 @@ public final class Multimaps {
   }
 
   /** A skeleton implementation of {@link Multimap#entries()}. */
-  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class Entries<K, V> extends AbstractCollection<Map.Entry<K, V>> {
     abstract Multimap<K, V> multimap();
 
