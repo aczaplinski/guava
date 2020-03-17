@@ -3521,7 +3521,7 @@ public final class Maps {
     }
   }
 
-  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class IteratorBasedAbstractMap<K, V> extends AbstractMap<K, V> {
     @Override
     public abstract int size();
@@ -3686,7 +3686,7 @@ public final class Maps {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class KeySet<K, V> extends Sets.ImprovedAbstractSet<K> {
     @Weak final Map<K, V> map;
@@ -3877,7 +3877,7 @@ public final class Maps {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class Values<K, V> extends AbstractCollection<V> {
     @Weak final Map<K, V> map;
@@ -4035,7 +4035,7 @@ public final class Maps {
     }
   }
 
-  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableMap
   abstract static class DescendingMap<K, V> extends ForwardingMap<K, V>

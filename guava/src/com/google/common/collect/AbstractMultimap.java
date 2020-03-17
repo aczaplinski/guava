@@ -120,7 +120,7 @@ abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
 
   abstract Collection<Entry<K, V>> createEntries();
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   class Entries extends Multimaps.Entries<K, V> {
     @Override
@@ -190,7 +190,7 @@ abstract class AbstractMultimap<K, V> implements Multimap<K, V> {
 
   abstract Collection<V> createValues();
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   class Values extends AbstractCollection<V> {
     @Override

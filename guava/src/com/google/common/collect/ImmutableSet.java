@@ -51,7 +51,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  *
  * @since 2.0
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization

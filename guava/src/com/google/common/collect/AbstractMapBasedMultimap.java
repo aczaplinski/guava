@@ -323,7 +323,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
    * the corresponding methods of the full wrapped collection.
    */
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   class WrappedCollection extends AbstractCollection<V> {
     final @Nullable K key;
@@ -434,7 +434,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
 
     /** Collection iterator for {@code WrappedCollection}. */
-    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.NONE)
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     class WrappedIterator implements Iterator<V> {
       final Iterator<V> delegateIterator;
       final Collection<V> originalDelegate = delegate;
@@ -753,7 +753,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
 
   /** List decorator that stays in sync with the multimap values for a key. */
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   class WrappedList extends WrappedCollection implements List<V> {
     WrappedList(@Nullable K key, List<V> delegate, @Nullable WrappedCollection ancestor) {
@@ -1387,7 +1387,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
       return Maps.immutableEntry(key, wrapCollection(key, entry.getValue()));
     }
 
-    @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+    @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
     @WeakOuter
     class AsMapEntries extends Maps.EntrySet<K, Collection<V>> {
       @Override
@@ -1424,7 +1424,7 @@ abstract class AbstractMapBasedMultimap<K, V> extends AbstractMultimap<K, V>
     }
 
     /** Iterator across all keys and value collections. */
-    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.NONE)
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     class AsMapIterator implements Iterator<Entry<K, Collection<V>>> {
       final Iterator<Entry<K, Collection<V>>> delegateIterator = submap.entrySet().iterator();
       @Nullable Collection<V> collection;

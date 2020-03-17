@@ -21,6 +21,8 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Map;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A bimap (or "bidirectional map") is a map that preserves the uniqueness of its values as well as
@@ -33,6 +35,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public interface BiMap<K, V> extends Map<K, V> {
   // Modification Operations

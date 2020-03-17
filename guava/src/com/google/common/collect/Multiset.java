@@ -31,6 +31,8 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.ObjIntConsumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A collection that supports order-independent equality, like {@link Set}, but may have duplicate
@@ -81,6 +83,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public interface Multiset<E> extends Collection<E> {
   // Query Operations

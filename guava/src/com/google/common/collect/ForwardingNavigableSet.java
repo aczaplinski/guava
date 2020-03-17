@@ -52,7 +52,7 @@ import java.util.SortedSet;
  * @author Louis Wasserman
  * @since 12.0
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtIncompatible
 public abstract class ForwardingNavigableSet<E> extends ForwardingSortedSet<E>

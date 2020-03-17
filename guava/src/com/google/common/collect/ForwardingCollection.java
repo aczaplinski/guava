@@ -48,7 +48,7 @@ import org.jpatterns.gof.structural.DecoratorPattern;
  * @author Louis Wasserman
  * @since 2.0
  */
-@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible
 public abstract class ForwardingCollection<E> extends ForwardingObject implements Collection<E> {

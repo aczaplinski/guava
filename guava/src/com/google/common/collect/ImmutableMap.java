@@ -64,7 +64,7 @@ import org.jpatterns.gof.structural.DecoratorPattern;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 @DoNotMock("Use ImmutableMap.of or another implementation")
 @GwtCompatible(serializable = true, emulated = true)

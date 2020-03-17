@@ -122,7 +122,7 @@ public final class Collections2 {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class FilteredCollection<E> extends AbstractCollection<E> {
     final Collection<E> unfiltered;
@@ -266,7 +266,7 @@ public final class Collections2 {
     return new TransformedCollection<>(fromCollection, function);
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class TransformedCollection<F, T> extends AbstractCollection<T> {
     final Collection<F> fromCollection;
     final Function<? super F, ? extends T> function;
@@ -443,7 +443,7 @@ public final class Collections2 {
     return new OrderedPermutationCollection<E>(elements, comparator);
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class OrderedPermutationCollection<E> extends AbstractCollection<List<E>> {
     final ImmutableList<E> inputList;
     final Comparator<? super E> comparator;
@@ -590,7 +590,7 @@ public final class Collections2 {
     return new PermutationCollection<E>(ImmutableList.copyOf(elements));
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class PermutationCollection<E> extends AbstractCollection<List<E>> {
     final ImmutableList<E> inputList;
 

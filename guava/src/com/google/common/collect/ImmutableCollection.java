@@ -161,7 +161,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  *
  * @since 2.0
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 @DoNotMock("Use ImmutableList.of or another implementation")
 @GwtCompatible(emulated = true)

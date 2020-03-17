@@ -1203,7 +1203,7 @@ public final class Sets {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @GwtIncompatible // NavigableSet
   private static class FilteredNavigableSet<E> extends FilteredSortedSet<E>
       implements NavigableSet<E> {
@@ -1503,7 +1503,7 @@ public final class Sets {
     return new PowerSet<E>(set);
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class SubSet<E> extends AbstractSet<E> {
     private final ImmutableMap<E, Integer> inputSet;
@@ -1549,7 +1549,7 @@ public final class Sets {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class PowerSet<E> extends AbstractSet<Set<E>> {
     final ImmutableMap<E, Integer> inputSet;
 
@@ -1785,7 +1785,7 @@ public final class Sets {
     return new UnmodifiableNavigableSet<E>(set);
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static final class UnmodifiableNavigableSet<E> extends ForwardingSortedSet<E>
       implements NavigableSet<E>, Serializable {
@@ -1969,7 +1969,7 @@ public final class Sets {
     }
   }
 
-  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableSet
   static class DescendingSet<E> extends ForwardingNavigableSet<E> {

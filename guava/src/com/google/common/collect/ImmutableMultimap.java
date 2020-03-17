@@ -68,7 +68,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  * @author Jared Levy
  * @since 2.0
  */
-@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.NONE)
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 @GwtCompatible(emulated = true)
 public abstract class ImmutableMultimap<K, V> extends BaseImmutableMultimap<K, V>

@@ -52,7 +52,7 @@ final class CollectSpliterators {
     if (comparator != null) {
       checkArgument((extraCharacteristics & Spliterator.SORTED) != 0);
     }
-    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.NONE)
+    @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
     class WithCharacteristics implements Spliterator<T> {
       private final Spliterator.OfInt delegate;
 
