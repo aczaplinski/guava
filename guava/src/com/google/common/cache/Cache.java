@@ -25,7 +25,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A semi-persistent mapping from keys to values. Cache entries are manually added using {@link
@@ -38,6 +40,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  * @author Charles Fry
  * @since 10.0
  */
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 @DoNotMock("Use CacheBuilder.newBuilder().build()")
 @GwtCompatible

@@ -29,6 +29,10 @@ import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ForwardingListenableFuture.SimpleForwardingListenableFuture;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.Collection;
@@ -548,6 +552,7 @@ public final class MoreExecutors {
         : new ScheduledListeningDecorator(delegate);
   }
 
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // TODO
   private static class ListeningDecorator extends AbstractListeningExecutorService {
     private final ExecutorService delegate;
@@ -587,6 +592,7 @@ public final class MoreExecutors {
     }
   }
 
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // TODO
   private static final class ScheduledListeningDecorator extends ListeningDecorator
       implements ListeningScheduledExecutorService {
@@ -630,6 +636,7 @@ public final class MoreExecutors {
       return new ListenableScheduledTask<>(task, scheduled);
     }
 
+    @ObserverPattern.ConcreteSubject(validationErrorLevel = ValidationErrorLevel.NONE)
     private static final class ListenableScheduledTask<V>
         extends SimpleForwardingListenableFuture<V> implements ListenableScheduledFuture<V> {
 

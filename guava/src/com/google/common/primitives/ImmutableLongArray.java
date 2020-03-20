@@ -34,6 +34,8 @@ import java.util.Spliterators;
 import java.util.function.LongConsumer;
 import java.util.stream.LongStream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * An immutable array of {@code long} values, with an API resembling {@link List}.
@@ -85,6 +87,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @since 22.0
  */
+@BuilderPattern.Product
 @Beta
 @GwtCompatible
 @Immutable
@@ -208,6 +211,7 @@ public final class ImmutableLongArray implements Serializable {
    * A builder for {@link ImmutableLongArray} instances; obtained using {@link
    * ImmutableLongArray#builder}.
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   @CanIgnoreReturnValue
   public static final class Builder {
     private long[] array;

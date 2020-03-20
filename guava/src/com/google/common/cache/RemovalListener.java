@@ -15,6 +15,8 @@
 package com.google.common.cache;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 
 /**
  * An object that can receive a notification when an entry is removed from a cache. The removal
@@ -32,6 +34,7 @@ import com.google.common.annotations.GwtCompatible;
  * @author Charles Fry
  * @since 10.0
  */
+@ObserverPattern.Observer(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 @FunctionalInterface
 public interface RemovalListener<K, V> {

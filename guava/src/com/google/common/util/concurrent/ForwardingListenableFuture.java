@@ -17,6 +17,10 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.concurrent.Executor;
 
 /**
@@ -29,6 +33,8 @@ import java.util.concurrent.Executor;
  * @author Shardul Deo
  * @since 4.0
  */
+@ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
 @GwtCompatible
 public abstract class ForwardingListenableFuture<V> extends ForwardingFuture<V>
@@ -52,6 +58,7 @@ public abstract class ForwardingListenableFuture<V> extends ForwardingFuture<V>
    *
    * @since 9.0
    */
+  @ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
   public abstract static class SimpleForwardingListenableFuture<V>
       extends ForwardingListenableFuture<V> {
     private final ListenableFuture<V> delegate;

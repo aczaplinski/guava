@@ -29,6 +29,8 @@ import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.plopd.NullObjectPattern;
 
 /**
  * Provides utility methods for working with character streams.
@@ -279,6 +281,7 @@ public final class CharStreams {
     return NullWriter.INSTANCE;
   }
 
+  @NullObjectPattern.NullObject(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class NullWriter extends Writer {
 
     private static final NullWriter INSTANCE = new NullWriter();

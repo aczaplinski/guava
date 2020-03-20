@@ -42,6 +42,8 @@ import java.util.concurrent.locks.LockSupport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 
 /**
  * An abstract implementation of {@link ListenableFuture}, intended for advanced users only. More
@@ -62,6 +64,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Luke Sandberg
  * @since 1.0
  */
+@ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
 @SuppressWarnings("ShortCircuitBoolean") // we use non-short circuiting comparisons intentionally
 @GwtCompatible(emulated = true)
 @ReflectionSupport(value = ReflectionSupport.Level.FULL)
@@ -261,6 +264,7 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
   }
 
   /** Listeners also form a stack through the {@link #listeners} field. */
+  @ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class Listener {
     static final Listener TOMBSTONE = new Listener(null, null);
     final Runnable task;

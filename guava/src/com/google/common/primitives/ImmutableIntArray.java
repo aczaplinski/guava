@@ -34,6 +34,8 @@ import java.util.Spliterators;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * An immutable array of {@code int} values, with an API resembling {@link List}.
@@ -85,6 +87,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @since 22.0
  */
+@BuilderPattern.Product
 @Beta
 @GwtCompatible
 @Immutable
@@ -206,6 +209,7 @@ public final class ImmutableIntArray implements Serializable {
    * A builder for {@link ImmutableIntArray} instances; obtained using {@link
    * ImmutableIntArray#builder}.
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   @CanIgnoreReturnValue
   public static final class Builder {
     private int[] array;

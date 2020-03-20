@@ -47,6 +47,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 
 /**
  * Static utility methods pertaining to the {@link Future} interface.
@@ -1046,6 +1048,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   }
 
   /** See {@link #addCallback(ListenableFuture, FutureCallback, Executor)} for behavioral notes. */
+  @ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class CallbackListener<V> implements Runnable {
     final Future<V> future;
     final FutureCallback<? super V> callback;

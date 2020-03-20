@@ -86,7 +86,12 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+import org.jpatterns.plopd.NullObjectPattern;
 
 /**
  * The concurrent hash map implementation built by {@link CacheBuilder}.
@@ -98,6 +103,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  * @author Bob Lee ({@code com.google.common.collect.MapMaker})
  * @author Doug Lea ({@code ConcurrentHashMap})
  */
+@ObserverPattern.ConcreteSubject(validationErrorLevel = ValidationErrorLevel.NONE)
 @SuppressWarnings("GoodTime") // lots of violations (nanosecond math)
 @GwtCompatible(emulated = true)
 class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> {
@@ -727,6 +733,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     return (ValueReference<K, V>) UNSET;
   }
 
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @NullObjectPattern.NullObject(validationErrorLevel = ValidationErrorLevel.ERROR)
   private enum NullEntry implements ReferenceEntry<Object, Object> {
     INSTANCE;
 
@@ -802,6 +810,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     public void setPreviousInWriteQueue(ReferenceEntry<Object, Object> previous) {}
   }
 
+  @NullObjectPattern.AbstractObject(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class AbstractReferenceEntry<K, V> implements ReferenceEntry<K, V> {
     @Override
     public ValueReference<K, V> getValueReference() {
@@ -1157,6 +1166,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
   }
 
   /** Used for weakly-referenced keys. */
+  @NullObjectPattern.RealObject(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class WeakEntry<K, V> extends WeakReference<K> implements ReferenceEntry<K, V> {
     WeakEntry(ReferenceQueue<K> queue, K key, int hash, @Nullable ReferenceEntry<K, V> next) {
       super(key, queue);
@@ -4684,6 +4694,8 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
    * <p>Unfortunately, readResolve() doesn't get called when a circular dependency is present, so
    * the proxy must be able to behave as the cache itself.
    */
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @ObserverPattern.ConcreteSubject(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class ManualSerializationProxy<K, V> extends ForwardingCache<K, V>
       implements Serializable {
     private static final long serialVersionUID = 1;

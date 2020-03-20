@@ -20,6 +20,9 @@ import com.google.common.annotations.Beta;
 import com.google.errorprone.annotations.DoNotMock;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+
 import java.time.Duration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +58,7 @@ import java.util.concurrent.TimeoutException;
  * @author Luke Sandberg
  * @since 9.0 (in 1.0 as {@code com.google.common.base.Service})
  */
+@ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @DoNotMock("Create an AbstractIdleService")
 @GwtIncompatible
@@ -274,6 +278,7 @@ public interface Service {
    * @author Luke Sandberg
    * @since 15.0 (present as an interface in 13.0)
    */
+  @ObserverPattern.Observer(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Beta // should come out of Beta when Service does
   abstract class Listener {
     /**

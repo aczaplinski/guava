@@ -54,6 +54,10 @@ import com.google.common.util.concurrent.Service.State;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
 import com.google.j2objc.annotations.WeakOuter;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.lang.ref.WeakReference;
 import java.time.Duration;
 import java.util.Collections;
@@ -159,6 +163,7 @@ public final class ServiceManager {
    * @author Luke Sandberg
    * @since 15.0 (present as an interface in 14.0)
    */
+  @ObserverPattern.Observer(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Beta // Should come out of Beta when ServiceManager does
   public abstract static class Listener {
     /**
@@ -784,6 +789,7 @@ public final class ServiceManager {
    * also calls the {@link ServiceManagerState#transitionService(Service, State, State)}, to record
    * the state transitions.
    */
+  @ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class ServiceListener extends Service.Listener {
     final Service service;
     // We store the state in a weak reference to ensure that if something went wrong while

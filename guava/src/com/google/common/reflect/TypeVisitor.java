@@ -15,6 +15,9 @@
 package com.google.common.reflect;
 
 import com.google.common.collect.Sets;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.VisitorPattern;
+
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -53,6 +56,7 @@ import java.util.Set;
  *
  * @author Ben Yu
  */
+@VisitorPattern.Visitor(validationErrorLevel = ValidationErrorLevel.ERROR)
 abstract class TypeVisitor {
 
   private final Set<Type> visited = Sets.newHashSet();

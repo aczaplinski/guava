@@ -17,6 +17,9 @@ package com.google.common.cache;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Callable;

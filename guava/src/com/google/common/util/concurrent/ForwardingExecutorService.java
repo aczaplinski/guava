@@ -17,6 +17,9 @@ package com.google.common.util.concurrent;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.ForwardingObject;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -34,6 +37,7 @@ import java.util.concurrent.TimeoutException;
  * @author Kurt Alfred Kluever
  * @since 10.0
  */
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @CanIgnoreReturnValue // TODO(cpovirk): Consider being more strict.
 @GwtIncompatible
 public abstract class ForwardingExecutorService extends ForwardingObject

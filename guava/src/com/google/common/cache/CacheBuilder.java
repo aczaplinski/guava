@@ -42,7 +42,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
 
 /**
  * A builder of {@link LoadingCache} and {@link Cache} instances having any combination of the
@@ -202,6 +204,8 @@ public final class CacheBuilder<K, V> {
         }
       };
 
+  @ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
   enum NullListener implements RemovalListener<Object, Object> {
     INSTANCE;
 

@@ -22,6 +22,8 @@ import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 
 /**
  * A support class for {@code ListenableFuture} implementations to manage their listeners. An
@@ -39,6 +41,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Sven Mawson
  * @since 1.0
  */
+@ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtIncompatible
 public final class ExecutionList {
   /** Logger to log exceptions caught when running runnables. */

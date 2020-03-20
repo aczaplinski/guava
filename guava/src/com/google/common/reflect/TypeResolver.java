@@ -36,6 +36,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.VisitorPattern;
 
 /**
  * An object of this class encapsulates type mappings from type variables. Mappings are established
@@ -369,6 +371,7 @@ public final class TypeResolver {
     }
   }
 
+  @VisitorPattern.ConcreteVisitor(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class TypeMappingIntrospector extends TypeVisitor {
 
     private final Map<TypeVariableKey, Type> mappings = Maps.newHashMap();

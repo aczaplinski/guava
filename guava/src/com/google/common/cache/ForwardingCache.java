@@ -23,6 +23,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A cache which forwards all its method calls to another cache. Subclasses should override one or
@@ -32,6 +35,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Charles Fry
  * @since 10.0
  */
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
+@ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 public abstract class ForwardingCache<K, V> extends ForwardingObject implements Cache<K, V> {
 
