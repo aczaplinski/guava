@@ -18,6 +18,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.Beta;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +31,7 @@ import java.io.InputStream;
  * @author Qian Huang
  * @since 16.0
  */
+@DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 public final class HashingInputStream extends FilterInputStream {
   private final Hasher hasher;

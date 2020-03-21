@@ -17,6 +17,9 @@ package com.google.common.hash;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.Beta;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,6 +30,7 @@ import java.io.OutputStream;
  * @author Nick Piepmeier
  * @since 16.0
  */
+@DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 public final class HashingOutputStream extends FilterOutputStream {
   private final Hasher hasher;

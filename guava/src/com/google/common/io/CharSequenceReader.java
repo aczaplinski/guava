@@ -19,6 +19,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkPositionIndexes;
 
 import com.google.common.annotations.GwtIncompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.AdapterPattern;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
@@ -30,6 +33,7 @@ import java.nio.CharBuffer;
  * @author Colin Decker
  */
 // TODO(cgdecker): make this public? as a type, or a method in CharStreams?
+@AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtIncompatible
 final class CharSequenceReader extends Reader {
 

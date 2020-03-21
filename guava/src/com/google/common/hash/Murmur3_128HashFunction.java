@@ -32,6 +32,9 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
+import org.jpatterns.gof.structural.CompositePattern;
 
 /**
  * See MurmurHash3_x64_128 in <a href="http://smhasher.googlecode.com/svn/trunk/MurmurHash3.cpp">the
@@ -40,6 +43,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Austin Appleby
  * @author Dimitris Andreou
  */
+@CompositePattern.Leaf(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Immutable
 final class Murmur3_128HashFunction extends AbstractHashFunction implements Serializable {
   static final HashFunction MURMUR3_128 = new Murmur3_128HashFunction(0);
@@ -83,6 +87,7 @@ final class Murmur3_128HashFunction extends AbstractHashFunction implements Seri
     return getClass().hashCode() ^ seed;
   }
 
+  @TemplateMethodPattern.ConcreteClass(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class Murmur3_128Hasher extends AbstractStreamingHasher {
     private static final int CHUNK_SIZE = 16;
     private static final long C1 = 0x87c37b91114253d5L;
@@ -98,6 +103,7 @@ final class Murmur3_128HashFunction extends AbstractHashFunction implements Seri
       this.length = 0;
     }
 
+    @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
     @Override
     protected void process(ByteBuffer bb) {
       long k1 = bb.getLong();
@@ -165,8 +171,9 @@ final class Murmur3_128HashFunction extends AbstractHashFunction implements Seri
       h2 ^= mixK2(k2);
     }
 
+    @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
     @Override
-    public HashCode makeHash() {
+    protected HashCode makeHash() {
       h1 ^= length;
       h2 ^= length;
 

@@ -19,6 +19,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
+
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
@@ -31,6 +34,7 @@ import java.util.Arrays;
  * @author Kevin Bourrillion
  * @author Dimitris Andreou
  */
+@CompositePattern.Leaf(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Immutable
 final class MessageDigestHashFunction extends AbstractHashFunction implements Serializable {
 

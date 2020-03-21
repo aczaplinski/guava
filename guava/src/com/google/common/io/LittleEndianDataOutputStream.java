@@ -18,6 +18,9 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Longs;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.FilterOutputStream;
@@ -35,6 +38,7 @@ import java.io.OutputStream;
  * @author Keith Bottner
  * @since 8.0
  */
+@DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtIncompatible
 public final class LittleEndianDataOutputStream extends FilterOutputStream implements DataOutput {

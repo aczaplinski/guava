@@ -20,6 +20,9 @@ import static com.google.common.base.Preconditions.checkPositionIndexes;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.primitives.UnsignedBytes;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.AdapterPattern;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -43,6 +46,7 @@ import java.util.Arrays;
  *
  * @author Chris Nokleberg
  */
+@AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtIncompatible
 final class ReaderInputStream extends InputStream {
   private final Reader reader;

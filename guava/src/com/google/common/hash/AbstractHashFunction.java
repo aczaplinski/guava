@@ -18,6 +18,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkPositionIndexes;
 
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -26,6 +29,7 @@ import java.nio.charset.Charset;
  *
  * <p>TODO(lowasser): make public
  */
+@CompositePattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Immutable
 abstract class AbstractHashFunction implements HashFunction {
   @Override

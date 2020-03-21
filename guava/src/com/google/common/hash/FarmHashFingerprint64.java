@@ -20,6 +20,8 @@ import static com.google.common.hash.LittleEndianByteArray.load64;
 import static java.lang.Long.rotateRight;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
 
 /**
  * Implementation of FarmHash Fingerprint64, an open-source fingerprinting algorithm for strings.
@@ -38,6 +40,7 @@ import com.google.common.annotations.VisibleForTesting;
  * @author Kyle Maddison
  * @author Geoff Pike
  */
+@CompositePattern.Leaf(validationErrorLevel = ValidationErrorLevel.ERROR)
 final class FarmHashFingerprint64 extends AbstractNonStreamingHashFunction {
   static final HashFunction FARMHASH_FINGERPRINT_64 = new FarmHashFingerprint64();
 

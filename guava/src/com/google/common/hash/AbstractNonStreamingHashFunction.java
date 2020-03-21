@@ -16,6 +16,9 @@ package com.google.common.hash;
 
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -29,6 +32,7 @@ import java.util.Arrays;
  *
  * @author Dimitris Andreou
  */
+@CompositePattern.Leaf(validationErrorLevel = ValidationErrorLevel.NONE)
 @Immutable
 abstract class AbstractNonStreamingHashFunction extends AbstractHashFunction {
   @Override

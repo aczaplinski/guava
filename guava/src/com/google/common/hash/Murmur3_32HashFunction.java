@@ -40,6 +40,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
 
 /**
  * See MurmurHash3_x86_32 in <a
@@ -50,6 +52,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Dimitris Andreou
  * @author Kurt Alfred Kluever
  */
+@CompositePattern.Leaf(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Immutable
 final class Murmur3_32HashFunction extends AbstractHashFunction implements Serializable {
   static final HashFunction MURMUR3_32 = new Murmur3_32HashFunction(0);

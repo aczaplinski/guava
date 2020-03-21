@@ -25,6 +25,9 @@ import com.google.errorprone.annotations.Immutable;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
+import org.jpatterns.gof.structural.CompositePattern;
 
 /**
  * {@link HashFunction} implementation of SipHash-c-d.
@@ -33,6 +36,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jean-Philippe Aumasson
  * @author Daniel J. Bernstein
  */
+@CompositePattern.Leaf(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Immutable
 final class SipHashFunction extends AbstractHashFunction implements Serializable {
   static final HashFunction SIP_HASH_24 =
@@ -94,6 +98,7 @@ final class SipHashFunction extends AbstractHashFunction implements Serializable
     return (int) (getClass().hashCode() ^ c ^ d ^ k0 ^ k1);
   }
 
+  @TemplateMethodPattern.ConcreteClass(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class SipHasher extends AbstractStreamingHasher {
     private static final int CHUNK_SIZE = 8;
 
@@ -128,6 +133,7 @@ final class SipHashFunction extends AbstractHashFunction implements Serializable
       this.v3 ^= k1;
     }
 
+    @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
     @Override
     protected void process(ByteBuffer buffer) {
       b += CHUNK_SIZE;
@@ -142,8 +148,9 @@ final class SipHashFunction extends AbstractHashFunction implements Serializable
       }
     }
 
+    @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
     @Override
-    public HashCode makeHash() {
+    protected HashCode makeHash() {
       // End with a byte encoding the positive integer b mod 256.
       finalM ^= b << 56;
       processM(finalM);

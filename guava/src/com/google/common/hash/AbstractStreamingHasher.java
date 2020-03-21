@@ -17,6 +17,9 @@ package com.google.common.hash;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -28,6 +31,7 @@ import java.nio.ByteOrder;
  * @author Dimitris Andreou
  */
 // TODO(kevinb): this class still needs some design-and-document-for-inheritance love
+@TemplateMethodPattern.AbstractClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @CanIgnoreReturnValue
 abstract class AbstractStreamingHasher extends AbstractHasher {
   /** Buffer via which we pass data to the hash algorithm (the implementor) */
@@ -71,6 +75,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
   }
 
   /** Processes the available bytes of the buffer (at most {@code chunk} bytes). */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
   protected abstract void process(ByteBuffer bb);
 
   /**
@@ -90,11 +95,13 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
     process(bb);
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putBytes(byte[] bytes, int off, int len) {
     return putBytesInternal(ByteBuffer.wrap(bytes, off, len).order(ByteOrder.LITTLE_ENDIAN));
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putBytes(ByteBuffer readBuffer) {
     ByteOrder order = readBuffer.order();
@@ -141,6 +148,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
    * at least for commonly used charsets like UTF-8.
    */
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putByte(byte b) {
     buffer.put(b);
@@ -148,6 +156,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
     return this;
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putShort(short s) {
     buffer.putShort(s);
@@ -155,6 +164,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
     return this;
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putChar(char c) {
     buffer.putChar(c);
@@ -162,6 +172,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
     return this;
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putInt(int i) {
     buffer.putInt(i);
@@ -169,6 +180,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
     return this;
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final Hasher putLong(long l) {
     buffer.putLong(l);
@@ -176,6 +188,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
     return this;
   }
 
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   public final HashCode hash() {
     munch();
@@ -192,6 +205,7 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
    * after all chunks are handled with {@link #process} and any leftover bytes that did not make a
    * complete chunk are handled with {@link #processRemaining}.
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
   protected abstract HashCode makeHash();
 
   // Process pent-up data in chunks

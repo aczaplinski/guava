@@ -16,6 +16,9 @@ package com.google.common.io;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
+
 import java.io.IOException;
 
 /**
@@ -29,6 +32,7 @@ import java.io.IOException;
  * @author Chris Nokleberg
  * @since 1.0
  */
+@TemplateMethodPattern.AbstractClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 abstract class LineBuffer {
   /** Holds partial line contents. */
@@ -46,7 +50,8 @@ abstract class LineBuffer {
    * @throws IOException if an I/O error occurs
    * @see #finish
    */
-  protected void add(char[] cbuf, int off, int len) throws IOException {
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
+  final void add(char[] cbuf, int off, int len) throws IOException {
     int pos = off;
     if (sawReturn && len > 0) {
       // Last call to add ended with a CR; we can handle the line now.
@@ -98,7 +103,8 @@ abstract class LineBuffer {
    *
    * @throws IOException if an I/O error occurs
    */
-  protected void finish() throws IOException {
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.ERROR)
+  final void finish() throws IOException {
     if (sawReturn || line.length() > 0) {
       finishLine(false);
     }
@@ -111,5 +117,6 @@ abstract class LineBuffer {
    * @param end the line separator; one of {@code "\r"}, {@code "\n"}, {@code "\r\n"}, or {@code ""}
    * @throws IOException if an I/O error occurs
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
   protected abstract void handleLine(String line, String end) throws IOException;
 }

@@ -17,6 +17,9 @@ package com.google.common.hash;
 import com.google.common.annotations.Beta;
 import com.google.common.primitives.Ints;
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -115,6 +118,7 @@ import java.nio.charset.Charset;
  * @author Kevin Bourrillion
  * @since 11.0
  */
+@CompositePattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @Immutable
 public interface HashFunction {

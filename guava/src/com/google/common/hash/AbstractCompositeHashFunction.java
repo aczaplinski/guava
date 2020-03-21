@@ -18,6 +18,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -28,6 +31,7 @@ import java.nio.charset.Charset;
  *
  * @author Dimitris Andreou
  */
+@CompositePattern.Composite(validationErrorLevel = ValidationErrorLevel.NONE)
 @Immutable
 abstract class AbstractCompositeHashFunction extends AbstractHashFunction {
 

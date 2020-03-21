@@ -22,6 +22,8 @@ import java.io.Flushable;
 import java.io.IOException;
 import java.io.Writer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.AdapterPattern;
 
 /**
  * Writer that places all output on an {@link Appendable} target. If the target is {@link Flushable}
@@ -31,6 +33,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Sebastian Kanthak
  * @since 1.0
  */
+@AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtIncompatible
 class AppendableWriter extends Writer {
   private final Appendable target;

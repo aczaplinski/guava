@@ -20,6 +20,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.EOFException;
@@ -38,6 +41,7 @@ import java.io.InputStream;
  * @author Keith Bottner
  * @since 8.0
  */
+@DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtIncompatible
 public final class LittleEndianDataInputStream extends FilterInputStream implements DataInput {

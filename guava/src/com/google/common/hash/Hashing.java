@@ -29,6 +29,8 @@ import java.util.zip.CRC32;
 import java.util.zip.Checksum;
 import javax.crypto.spec.SecretKeySpec;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.CompositePattern;
 
 /**
  * Static methods to obtain {@link HashFunction} instances, and other static hashing-related
@@ -609,6 +611,7 @@ public final class Hashing {
     return new ConcatenatedHashFunction(list.toArray(new HashFunction[0]));
   }
 
+  @CompositePattern.Composite(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class ConcatenatedHashFunction extends AbstractCompositeHashFunction {
 
     private ConcatenatedHashFunction(HashFunction... functions) {
