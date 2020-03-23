@@ -20,6 +20,8 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Iterator;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An interface for representing and manipulating an origin node's adjacent nodes and edge values in
@@ -29,6 +31,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 interface GraphConnections<N, V> {
 
   Set<N> adjacentNodes();

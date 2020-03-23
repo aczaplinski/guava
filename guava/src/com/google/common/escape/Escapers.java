@@ -22,6 +22,9 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.HashMap;
 import java.util.Map;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * Static utility methods pertaining to {@link Escaper} instances.
@@ -90,6 +93,7 @@ public final class Escapers {
    * @author David Beaumont
    * @since 15.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   @Beta
   public static final class Builder {
     private final Map<Character, String> replacementMap = new HashMap<>();
@@ -154,6 +158,7 @@ public final class Escapers {
         private final char[] replacementChars =
             unsafeReplacement != null ? unsafeReplacement.toCharArray() : null;
 
+        @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.NONE)
         @Override
         protected char[] escapeUnsafe(char c) {
           return replacementChars;

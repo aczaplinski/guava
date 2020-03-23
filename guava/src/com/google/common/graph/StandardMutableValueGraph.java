@@ -24,7 +24,9 @@ import static com.google.common.graph.Graphs.checkNonNegative;
 import static com.google.common.graph.Graphs.checkPositive;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Standard implementation of {@link MutableValueGraph} that supports both directed and undirected
@@ -39,6 +41,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
+@DecoratorPattern.ConcreteComponent(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 final class StandardMutableValueGraph<N, V> extends StandardValueGraph<N, V>
     implements MutableValueGraph<N, V> {

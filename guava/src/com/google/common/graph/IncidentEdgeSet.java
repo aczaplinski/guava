@@ -19,11 +19,14 @@ package com.google.common.graph;
 import java.util.AbstractSet;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Abstract base class for an incident edges set that allows different implementations of {@link
  * AbstractSet#iterator()}.
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 abstract class IncidentEdgeSet<N> extends AbstractSet<EndpointPair<N>> {
   protected final N node;
   protected final BaseGraph<N> graph;

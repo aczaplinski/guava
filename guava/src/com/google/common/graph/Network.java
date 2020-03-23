@@ -21,6 +21,8 @@ import com.google.errorprone.annotations.DoNotMock;
 import java.util.Optional;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * An interface for <a
@@ -102,6 +104,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <E> Edge parameter type
  * @since 20.0
  */
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @DoNotMock("Use NetworkBuilder to create a real instance")
 public interface Network<N, E> extends SuccessorsFunction<N>, PredecessorsFunction<N> {

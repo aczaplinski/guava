@@ -19,6 +19,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.annotations.Beta;
 import com.google.common.base.MoreObjects;
 import com.google.common.util.concurrent.MoreExecutors;
+import org.jpatterns.gof.structural.FacadePattern;
+
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Locale;
@@ -92,6 +94,7 @@ import java.util.logging.Logger;
  * @author Cliff Biffle
  * @since 10.0
  */
+@FacadePattern
 @Beta
 public class EventBus {
 

@@ -26,6 +26,8 @@ import com.google.common.collect.Maps;
 import com.google.common.graph.GraphConstants.Presence;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A {@link Graph} whose elements and structural relationships will never change. Instances of this
@@ -43,6 +45,7 @@ import com.google.errorprone.annotations.Immutable;
  * @param <N> Node parameter type
  * @since 20.0
  */
+@DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @Immutable(containerOf = {"N"})
 public class ImmutableGraph<N> extends ForwardingGraph<N> {

@@ -18,6 +18,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
+
 import java.util.Map;
 
 /**
@@ -40,6 +43,8 @@ import java.util.Map;
  * @author David Beaumont
  * @since 15.0
  */
+@TemplateMethodPattern.ConcreteClass(validationErrorLevel = ValidationErrorLevel.NONE)
+@TemplateMethodPattern.AbstractClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible
 public abstract class ArrayBasedCharEscaper extends CharEscaper {
@@ -118,6 +123,8 @@ public abstract class ArrayBasedCharEscaper extends CharEscaper {
    * character does not have an explicit replacement and lies outside the safe range then {@link
    * #escapeUnsafe} is called.
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   @Override
   protected final char[] escape(char c) {
     if (c < replacementsLength) {
@@ -145,5 +152,6 @@ public abstract class ArrayBasedCharEscaper extends CharEscaper {
    * @return the replacement characters, or {@code null} if no escaping was required
    */
   // TODO(dbeaumont,cpovirk): Rename this something better once refactoring done
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.NONE)
   protected abstract char[] escapeUnsafe(char c);
 }

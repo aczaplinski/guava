@@ -16,6 +16,9 @@
 
 package com.google.common.graph;
 
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.Set;
 
 /**
@@ -24,6 +27,7 @@ import java.util.Set;
  * @author James Sexton
  * @param <N> Node parameter type
  */
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 interface BaseGraph<N> extends SuccessorsFunction<N>, PredecessorsFunction<N> {
   //
   // Graph-level accessors

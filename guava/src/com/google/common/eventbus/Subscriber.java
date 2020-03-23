@@ -22,6 +22,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.Executor;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ObserverPattern;
 
 /**
  * A subscriber method on a specific object, plus the executor that should be used for dispatching
@@ -32,6 +34,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Colin Decker
  */
+@ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.NONE)
 class Subscriber {
 
   /** Creates a {@code Subscriber} for {@code method} on {@code listener}. */

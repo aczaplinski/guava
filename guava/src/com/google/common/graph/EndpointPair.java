@@ -25,6 +25,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.errorprone.annotations.Immutable;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An immutable pair representing the two endpoints of an edge in a graph. The {@link EndpointPair}
@@ -37,6 +39,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author James Sexton
  * @since 20.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @Immutable(containerOf = {"N"})
 public abstract class EndpointPair<N> implements Iterable<N> {
@@ -142,6 +145,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
   @Override
   public abstract int hashCode();
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class Ordered<N> extends EndpointPair<N> {
     private Ordered(N source, N target) {
       super(source, target);
@@ -190,6 +194,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class Unordered<N> extends EndpointPair<N> {
     private Unordered(N nodeU, N nodeV) {
       super(nodeU, nodeV);

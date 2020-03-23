@@ -17,7 +17,10 @@
 package com.google.common.graph;
 
 import com.google.common.graph.GraphConstants.Presence;
+import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.structural.AdapterPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Standard implementation of {@link MutableGraph} that supports both directed and undirected
@@ -29,6 +32,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  * @author James Sexton
  * @param <N> Node parameter type
  */
+@AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
 final class StandardMutableGraph<N> extends ForwardingGraph<N> implements MutableGraph<N> {
   private final MutableValueGraph<N, Presence> backingValueGraph;

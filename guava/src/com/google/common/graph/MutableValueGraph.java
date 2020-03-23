@@ -19,6 +19,7 @@ package com.google.common.graph;
 import com.google.common.annotations.Beta;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.structural.AdapterPattern;
 
 /**
  * A subinterface of {@link ValueGraph} which adds mutation methods. When mutation is not required,
@@ -29,6 +30,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  * @param <V> Value parameter type
  * @since 20.0
  */
+@AdapterPattern.Adaptee
 @BuilderPattern.Product
 @Beta
 public interface MutableValueGraph<N, V> extends ValueGraph<N, V> {

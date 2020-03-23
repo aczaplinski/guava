@@ -18,6 +18,8 @@ package com.google.common.graph;
 
 import com.google.common.annotations.Beta;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * This class provides a skeletal implementation of {@link Graph}. It is recommended to extend this
@@ -27,6 +29,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <N> Node parameter type
  * @since 20.0
  */
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 public abstract class AbstractGraph<N> extends AbstractBaseGraph<N> implements Graph<N> {
 

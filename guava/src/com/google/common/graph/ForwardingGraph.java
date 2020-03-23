@@ -16,6 +16,9 @@
 
 package com.google.common.graph;
 
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.Set;
 
 /**
@@ -24,6 +27,7 @@ import java.util.Set;
  *
  * @author James Sexton
  */
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 abstract class ForwardingGraph<N> extends AbstractGraph<N> {
 
   protected abstract BaseGraph<N> delegate();

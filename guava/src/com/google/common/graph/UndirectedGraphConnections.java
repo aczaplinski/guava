@@ -23,6 +23,9 @@ import static com.google.common.graph.GraphConstants.INNER_LOAD_FACTOR;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterators;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,6 +40,7 @@ import java.util.Set;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
   private final Map<N, V> adjacentNodeValues;
 

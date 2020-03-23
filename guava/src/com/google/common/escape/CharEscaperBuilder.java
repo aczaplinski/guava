@@ -20,6 +20,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
 
 import java.util.HashMap;
@@ -43,6 +44,7 @@ public final class CharEscaperBuilder {
    * Simple decorator that turns an array of replacement char[]s into a CharEscaper, this results in
    * a very fast escape method.
    */
+  @TemplateMethodPattern.ConcreteClass(validationErrorLevel = ValidationErrorLevel.ERROR)
   @BuilderPattern.Product
   private static class CharArrayDecorator extends CharEscaper {
     private final char[][] replacements;
@@ -69,6 +71,7 @@ public final class CharEscaperBuilder {
       return s;
     }
 
+    @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
     @Override
     protected char[] escape(char c) {
       return c < replaceLength ? replacements[c] : null;

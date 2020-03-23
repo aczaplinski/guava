@@ -18,6 +18,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
 
 /**
  * An object that converts literal text into a format safe for inclusion in a particular context
@@ -39,6 +41,7 @@ import com.google.common.annotations.GwtCompatible;
  * @author Sven Mawson
  * @since 15.0
  */
+@TemplateMethodPattern.AbstractClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible
 public abstract class CharEscaper extends Escaper {
@@ -52,6 +55,7 @@ public abstract class CharEscaper extends Escaper {
    * @return the escaped form of {@code string}
    * @throws NullPointerException if {@code string} is null
    */
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   @Override
   public String escape(String string) {
     checkNotNull(string); // GWT specific check (do not optimize)
@@ -80,6 +84,7 @@ public abstract class CharEscaper extends Escaper {
    * @param c the character to escape if necessary
    * @return the replacement characters, or {@code null} if no escaping was needed
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
   protected abstract char[] escape(char c);
 
   /**

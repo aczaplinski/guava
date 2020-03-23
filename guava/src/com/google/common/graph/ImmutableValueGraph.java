@@ -24,6 +24,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A {@link ValueGraph} whose elements and structural relationships will never change. Instances of
@@ -40,6 +42,7 @@ import com.google.errorprone.annotations.Immutable;
  * @param <V> Value parameter type
  * @since 20.0
  */
+@DecoratorPattern.ConcreteComponent(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @Immutable(containerOf = {"N", "V"})
 @SuppressWarnings("Immutable") // Extends StandardValueGraph but uses ImmutableMaps.

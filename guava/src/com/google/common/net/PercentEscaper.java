@@ -19,6 +19,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.escape.UnicodeEscaper;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
 
 /**
  * A {@code UnicodeEscaper} that escapes some set of Java characters using a UTF-8 based percent
@@ -49,6 +51,7 @@ import com.google.common.escape.UnicodeEscaper;
  * @author David Beaumont
  * @since 15.0
  */
+@TemplateMethodPattern.ConcreteClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible
 public final class PercentEscaper extends UnicodeEscaper {
@@ -154,6 +157,7 @@ public final class PercentEscaper extends UnicodeEscaper {
   }
 
   /** Escapes the given Unicode code point in UTF-8. */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
   @Override
   protected char[] escape(int cp) {
     // We should never get negative values here but if we do it will throw an

@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Standard implementation of {@link ValueGraph} that supports the options supplied by {@link
@@ -43,6 +45,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
+@DecoratorPattern.ConcreteComponent(validationErrorLevel = ValidationErrorLevel.ERROR)
 class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
   private final boolean isDirected;
   private final boolean allowsSelfLoops;

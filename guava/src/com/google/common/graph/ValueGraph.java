@@ -21,6 +21,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * An interface for <a
@@ -107,6 +109,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <V> Value parameter type
  * @since 20.0
  */
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 public interface ValueGraph<N, V> extends BaseGraph<N> {
   //

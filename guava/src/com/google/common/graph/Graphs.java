@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Static utility methods for {@link Graph}, {@link ValueGraph}, and {@link Network} instances.
@@ -255,6 +257,7 @@ public final class Graphs {
 
   // NOTE: this should work as long as the delegate graph's implementation of edges() (like that of
   // AbstractGraph) derives its behavior from calling successors().
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class TransposedGraph<N> extends ForwardingGraph<N> {
     private final Graph<N> graph;
 
@@ -317,6 +320,7 @@ public final class Graphs {
 
   // NOTE: this should work as long as the delegate graph's implementation of edges() (like that of
   // AbstractValueGraph) derives its behavior from calling successors().
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class TransposedValueGraph<N, V> extends ForwardingValueGraph<N, V> {
     private final ValueGraph<N, V> graph;
 
@@ -380,6 +384,7 @@ public final class Graphs {
     }
   }
 
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class TransposedNetwork<N, E> extends ForwardingNetwork<N, E> {
     private final Network<N, E> network;
 

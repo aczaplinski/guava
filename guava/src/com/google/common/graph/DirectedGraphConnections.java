@@ -41,6 +41,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An implementation of {@link GraphConnections} for directed graphs.
@@ -50,6 +52,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <N> Node parameter type
  * @param <V> Value parameter type
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
   /**
    * A wrapper class to indicate a node is both a predecessor and successor while still providing

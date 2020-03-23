@@ -18,6 +18,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
 
 /**
  * An {@link Escaper} that converts literal text into a format safe for inclusion in a particular
@@ -49,6 +51,7 @@ import com.google.common.annotations.GwtCompatible;
  * @author David Beaumont
  * @since 15.0
  */
+@TemplateMethodPattern.AbstractClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible
 public abstract class UnicodeEscaper extends Escaper {
@@ -77,6 +80,7 @@ public abstract class UnicodeEscaper extends Escaper {
    * @param cp the Unicode code point to escape if necessary
    * @return the replacement characters, or {@code null} if no escaping was needed
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
   protected abstract char[] escape(int cp);
 
   /**
@@ -97,6 +101,7 @@ public abstract class UnicodeEscaper extends Escaper {
    * @throws NullPointerException if {@code string} is null
    * @throws IllegalArgumentException if invalid surrogate characters are encountered
    */
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   @Override
   public String escape(String string) {
     checkNotNull(string);

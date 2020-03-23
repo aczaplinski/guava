@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Standard implementation of {@link Network} that supports the options supplied by {@link
@@ -48,6 +50,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @param <N> Node parameter type
  * @param <E> Edge parameter type
  */
+@DecoratorPattern.ConcreteComponent(validationErrorLevel = ValidationErrorLevel.ERROR)
 class StandardNetwork<N, E> extends AbstractNetwork<N, E> {
   private final boolean isDirected;
   private final boolean allowsParallelEdges;

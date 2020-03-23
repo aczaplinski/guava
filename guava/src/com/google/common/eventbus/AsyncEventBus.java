@@ -15,6 +15,8 @@
 package com.google.common.eventbus;
 
 import com.google.common.annotations.Beta;
+import org.jpatterns.gof.structural.FacadePattern;
+
 import java.util.concurrent.Executor;
 
 /**
@@ -24,6 +26,7 @@ import java.util.concurrent.Executor;
  * @author Cliff Biffle
  * @since 10.0
  */
+@FacadePattern
 @Beta
 public class AsyncEventBus extends EventBus {
 

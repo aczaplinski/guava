@@ -20,6 +20,8 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import java.util.Map;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.TemplateMethodPattern;
 
 /**
  * A {@link UnicodeEscaper} that uses an array to quickly look up replacement characters for a given
@@ -40,6 +42,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author David Beaumont
  * @since 15.0
  */
+@TemplateMethodPattern.ConcreteClass(validationErrorLevel = ValidationErrorLevel.NONE)
+@TemplateMethodPattern.AbstractClass(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible
 public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
@@ -158,6 +162,8 @@ public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
    * given character does not have an explicit replacement and lies outside the safe range then
    * {@link #escapeUnsafe} is called.
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @TemplateMethodPattern.TemplateMethod(validationErrorLevel = ValidationErrorLevel.NONE)
   @Override
   protected final char[] escape(int cp) {
     if (cp < replacementsLength) {
@@ -199,5 +205,6 @@ public abstract class ArrayBasedUnicodeEscaper extends UnicodeEscaper {
    * @param cp the Unicode code point to escape
    * @return the replacement characters, or {@code null} if no escaping was required
    */
+  @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.NONE)
   protected abstract char[] escapeUnsafe(int cp);
 }

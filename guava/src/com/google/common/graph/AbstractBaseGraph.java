@@ -31,6 +31,8 @@ import com.google.common.primitives.Ints;
 import java.util.AbstractSet;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * This class provides a skeletal implementation of {@link BaseGraph}.
@@ -41,6 +43,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author James Sexton
  * @param <N> Node parameter type
  */
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 abstract class AbstractBaseGraph<N> implements BaseGraph<N> {
 
   /**
