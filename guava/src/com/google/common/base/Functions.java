@@ -21,6 +21,8 @@ import com.google.common.annotations.GwtCompatible;
 import java.io.Serializable;
 import java.util.Map;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.SingletonPattern;
 
 /**
  * Static utility methods pertaining to {@code com.google.common.base.Function} instances; see that
@@ -60,7 +62,7 @@ public final class Functions {
     return ToStringFunction.INSTANCE;
   }
 
-  // enum singleton pattern
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
   private enum ToStringFunction implements Function<Object, String> {
     INSTANCE;
 
@@ -83,7 +85,7 @@ public final class Functions {
     return (Function<E, E>) IdentityFunction.INSTANCE;
   }
 
-  // enum singleton pattern
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
   private enum IdentityFunction implements Function<Object, Object> {
     INSTANCE;
 

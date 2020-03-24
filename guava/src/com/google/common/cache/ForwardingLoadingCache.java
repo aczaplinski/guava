@@ -17,6 +17,9 @@ package com.google.common.cache;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -30,6 +33,7 @@ import java.util.concurrent.ExecutionException;
  * @author Charles Fry
  * @since 11.0
  */
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 public abstract class ForwardingLoadingCache<K, V> extends ForwardingCache<K, V>
     implements LoadingCache<K, V> {
@@ -71,6 +75,7 @@ public abstract class ForwardingLoadingCache<K, V> extends ForwardingCache<K, V>
    *
    * @since 10.0
    */
+  @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
   public abstract static class SimpleForwardingLoadingCache<K, V>
       extends ForwardingLoadingCache<K, V> {
     private final LoadingCache<K, V> delegate;

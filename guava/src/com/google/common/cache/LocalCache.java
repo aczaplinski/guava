@@ -87,7 +87,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 import org.jpatterns.gof.behavioral.ObserverPattern;
+import org.jpatterns.gof.creational.AbstractFactoryPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
 import org.jpatterns.gof.creational.SingletonPattern;
 import org.jpatterns.gof.structural.DecoratorPattern;
@@ -443,6 +445,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
   }
 
   /** Creates new entries. */
+  @AbstractFactoryPattern.ConcreteFactory(validationErrorLevel = ValidationErrorLevel.NONE)
   enum EntryFactory {
     STRONG {
       @Override
@@ -4318,7 +4321,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
   }
 
   // Iterator Support
-
+  @IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract class HashIterator<T> implements Iterator<T> {
 
     int nextSegmentIndex;
@@ -4428,6 +4431,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class KeyIterator extends HashIterator<K> {
 
     @Override
@@ -4436,6 +4440,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class ValueIterator extends HashIterator<V> {
 
     @Override
@@ -4496,6 +4501,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class EntryIterator extends HashIterator<Entry<K, V>> {
 
     @Override
@@ -4504,6 +4510,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract class AbstractCacheSet<T> extends AbstractSet<T> {
     @Weak final ConcurrentMap<?, ?> map;
 
@@ -4564,6 +4571,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     return changed;
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   final class KeySet extends AbstractCacheSet<K> {
 
@@ -4587,6 +4595,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   final class Values extends AbstractCollection<V> {
     private final ConcurrentMap<?, ?> map;
@@ -4640,6 +4649,7 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   final class EntrySet extends AbstractCacheSet<Entry<K, V>> {
 

@@ -35,7 +35,7 @@ import org.jpatterns.gof.structural.DecoratorPattern;
  * @author Charles Fry
  * @since 10.0
  */
-@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.NONE)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @ObserverPattern.Subject(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 public abstract class ForwardingCache<K, V> extends ForwardingObject implements Cache<K, V> {
@@ -118,6 +118,7 @@ public abstract class ForwardingCache<K, V> extends ForwardingObject implements 
    *
    * @since 10.0
    */
+  @DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
   public abstract static class SimpleForwardingCache<K, V> extends ForwardingCache<K, V> {
     private final Cache<K, V> delegate;
 

@@ -20,6 +20,8 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Arrays;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * Helper functions that operate on any {@code Object}, and are not already provided in {@link
@@ -140,6 +142,7 @@ public final class MoreObjects {
    * @author Jason Lee
    * @since 18.0 (since 2.0 as {@code Objects.ToStringHelper}).
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   public static final class ToStringHelper {
     private final String className;
     private final ValueHolder holderHead = new ValueHolder();

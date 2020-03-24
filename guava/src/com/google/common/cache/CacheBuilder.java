@@ -45,6 +45,7 @@ import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.behavioral.ObserverPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
 import org.jpatterns.gof.creational.SingletonPattern;
+import org.jpatterns.plopd.NullObjectPattern;
 
 /**
  * A builder of {@link LoadingCache} and {@link Cache} instances having any combination of the
@@ -206,6 +207,7 @@ public final class CacheBuilder<K, V> {
 
   @ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.ERROR)
   @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @NullObjectPattern.NullObject(validationErrorLevel = ValidationErrorLevel.ERROR)
   enum NullListener implements RemovalListener<Object, Object> {
     INSTANCE;
 

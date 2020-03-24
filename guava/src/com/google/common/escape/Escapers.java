@@ -158,7 +158,7 @@ public final class Escapers {
         private final char[] replacementChars =
             unsafeReplacement != null ? unsafeReplacement.toCharArray() : null;
 
-        @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.NONE)
+        @TemplateMethodPattern.PrimitiveOperation(validationErrorLevel = ValidationErrorLevel.ERROR)
         @Override
         protected char[] escapeUnsafe(char c) {
           return replacementChars;

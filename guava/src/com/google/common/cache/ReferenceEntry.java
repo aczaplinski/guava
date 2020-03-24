@@ -18,6 +18,7 @@ import com.google.common.annotations.GwtIncompatible;
 import com.google.common.cache.LocalCache.ValueReference;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.AbstractFactoryPattern;
 import org.jpatterns.plopd.NullObjectPattern;
 
 /**
@@ -41,6 +42,7 @@ import org.jpatterns.plopd.NullObjectPattern;
  * </ul>
  */
 @NullObjectPattern.AbstractObject(validationErrorLevel = ValidationErrorLevel.ERROR)
+@AbstractFactoryPattern.AbstractProduct
 @GwtIncompatible
 interface ReferenceEntry<K, V> {
   /** Returns the value reference from this entry. */
