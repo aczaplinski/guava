@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * This class provides a skeletal implementation of the {@link Multiset} interface. A new multiset
@@ -41,6 +43,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @author Louis Wasserman
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 abstract class AbstractMultiset<E> extends AbstractCollection<E> implements Multiset<E> {
   // Query Operations
@@ -169,6 +172,7 @@ abstract class AbstractMultiset<E> extends AbstractCollection<E> implements Mult
     return result;
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   class EntrySet extends Multisets.EntrySet<E> {
     @Override

@@ -26,12 +26,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Implementation for {@link FilteredMultimap#values()}.
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 final class FilteredMultimapValues<K, V> extends AbstractCollection<V> {
   @Weak private final FilteredMultimap<K, V> multimap;

@@ -36,6 +36,9 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A {@link RangeSet} whose contents will never change, with many other important properties
@@ -44,6 +47,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 14.0
  */
+@BuilderPattern.Product
 @Beta
 @GwtIncompatible
 public final class ImmutableRangeSet<C extends Comparable> extends AbstractRangeSet<C>
@@ -300,6 +304,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
   @LazyInit private transient ImmutableRangeSet<C> complement;
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private final class ComplementRanges extends ImmutableList<Range<C>> {
     // True if the "positive" range set is empty or bounded below.
     private final boolean positiveBoundedBelow;
@@ -532,6 +537,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     return new AsSet(domain);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private final class AsSet extends ImmutableSortedSet<C> {
     private final DiscreteDomain<C> domain;
 
@@ -713,6 +719,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
    *
    * @since 14.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   public static class Builder<C extends Comparable<?>> {
     private final List<Range<C>> ranges;
 

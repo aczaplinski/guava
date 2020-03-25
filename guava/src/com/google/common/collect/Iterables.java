@@ -40,6 +40,9 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * An assortment of mainly legacy static utility methods that operate on or return objects of type
@@ -89,6 +92,8 @@ public final class Iterables {
     return checkNotNull(iterable);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class UnmodifiableIterable<T> extends FluentIterable<T> {
     private final Iterable<? extends T> iterable;
 

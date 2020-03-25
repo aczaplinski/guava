@@ -23,6 +23,8 @@ import com.google.common.base.Equivalence;
 import com.google.common.base.Function;
 import com.google.common.collect.MapMaker.Dummy;
 import com.google.common.collect.MapMakerInternalMap.InternalEntry;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * Contains static methods pertaining to instances of {@link Interner}.
@@ -30,6 +32,7 @@ import com.google.common.collect.MapMakerInternalMap.InternalEntry;
  * @author Kevin Bourrillion
  * @since 3.0
  */
+@BuilderPattern.Director(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtIncompatible
 public final class Interners {
@@ -40,6 +43,7 @@ public final class Interners {
    *
    * @since 21.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   public static class InternerBuilder {
     private final MapMaker mapMaker = new MapMaker();
     private boolean strong = true;
@@ -110,6 +114,7 @@ public final class Interners {
     return newBuilder().weak().build();
   }
 
+  @BuilderPattern.Product
   @VisibleForTesting
   static final class InternerImpl<E> implements Interner<E> {
     // MapMaker is our friend, we know about this type

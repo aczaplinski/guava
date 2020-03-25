@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.ObjIntConsumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Basic implementation of {@code Multiset<E>} backed by an instance of {@code Map<E, Count>}.
@@ -43,6 +45,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Kevin Bourrillion
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E> implements Serializable {
   // TODO(lowasser): consider overhauling this back to Map<E, Integer>
@@ -190,6 +193,7 @@ abstract class AbstractMapBasedMultiset<E> extends AbstractMultiset<E> implement
    * retrieve the Map.Entry<E, Count> entry, which can then be used for
    * a more efficient remove() call.
    */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private class MapBasedMultisetIterator implements Iterator<E> {
     final Iterator<Map.Entry<E, Count>> entryIterator;
     Map.@Nullable Entry<E, Count> currentEntry;

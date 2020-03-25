@@ -35,6 +35,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.behavioral.IteratorPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A {@link Collection} whose contents will never change, and which offers a few additional
@@ -163,6 +164,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  */
 @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @DoNotMock("Use ImmutableList.of or another implementation")
 @GwtCompatible(emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization

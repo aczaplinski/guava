@@ -25,6 +25,8 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * CompactLinkedHashSet is an implementation of a Set, which a predictable iteration order that
@@ -47,6 +49,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible // not worth using in GWT for now
 class CompactLinkedHashSet<E> extends CompactHashSet<E> {
 

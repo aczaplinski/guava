@@ -24,6 +24,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A list which forwards all its method calls to another list. Subclasses should override one or
@@ -50,6 +53,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class ForwardingList<E> extends ForwardingCollection<E> implements List<E> {
   // TODO(lowasser): identify places where thread safety is actually lost

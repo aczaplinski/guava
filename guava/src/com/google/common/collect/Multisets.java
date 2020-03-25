@@ -41,6 +41,8 @@ import java.util.Set;
 import java.util.Spliterator;
 import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Provides static utility methods for creating and working with {@link Multiset} instances.
@@ -966,6 +968,7 @@ public final class Multisets {
     };
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class ElementSet<E> extends Sets.ImprovedAbstractSet<E> {
     abstract Multiset<E> multiset();
 
@@ -1003,6 +1006,7 @@ public final class Multisets {
     }
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract static class EntrySet<E> extends Sets.ImprovedAbstractSet<Entry<E>> {
     abstract Multiset<E> multiset();
 

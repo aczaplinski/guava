@@ -20,9 +20,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 abstract class IndexedImmutableSet<E> extends ImmutableSet<E> {
   abstract E get(int index);

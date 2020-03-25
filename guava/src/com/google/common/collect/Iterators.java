@@ -48,6 +48,7 @@ import java.util.Queue;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
 
 /**
  * This class contains static utility methods that operate on or return objects of type {@link
@@ -94,6 +95,7 @@ public final class Iterators {
    * This is an enum singleton rather than an anonymous class so ProGuard can figure out it's only
    * referenced by emptyModifiableIterator().
    */
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
   private enum EmptyModifiableIterator implements Iterator<Object> {
     INSTANCE;
 

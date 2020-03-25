@@ -22,6 +22,8 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import java.util.Comparator;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.ChainOfResponsibilityPattern;
 
 /**
  * A utility for performing a chained comparison statement. For example:
@@ -56,6 +58,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+@ChainOfResponsibilityPattern.Handler(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class ComparisonChain {
   private ComparisonChain() {}
@@ -123,6 +126,7 @@ public abstract class ComparisonChain {
 
   private static final ComparisonChain GREATER = new InactiveComparisonChain(1);
 
+  @ChainOfResponsibilityPattern.ConcreteHandler(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class InactiveComparisonChain extends ComparisonChain {
     final int result;
 

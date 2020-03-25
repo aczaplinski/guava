@@ -15,6 +15,9 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -24,6 +27,7 @@ import java.util.Iterator;
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 interface SortedIterable<T> extends Iterable<T> {
   /**

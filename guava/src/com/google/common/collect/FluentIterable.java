@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.stream.Stream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A discouraged (but not deprecated) precursor to Java's superior {@link Stream} library.
@@ -106,6 +108,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Marcin Mikosik
  * @since 12.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 public abstract class FluentIterable<E> implements Iterable<E> {
   // We store 'iterable' and use it instead of 'this' to allow Iterables to perform instanceof

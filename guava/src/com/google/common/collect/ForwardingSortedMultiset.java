@@ -16,6 +16,10 @@ package com.google.common.collect;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -42,6 +46,8 @@ import java.util.NavigableSet;
  * @author Louis Wasserman
  * @since 15.0
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+@DecoratorPattern.Decorator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible(emulated = true)
 public abstract class ForwardingSortedMultiset<E> extends ForwardingMultiset<E>

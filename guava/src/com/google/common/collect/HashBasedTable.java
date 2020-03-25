@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.AbstractFactoryPattern;
 
 /**
  * Implementation of {@link Table} using linked hash tables. This guarantees predictable iteration
@@ -50,6 +52,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 @GwtCompatible(serializable = true)
 public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
+  @AbstractFactoryPattern.ConcreteFactory(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {
     final int expectedSize;
 

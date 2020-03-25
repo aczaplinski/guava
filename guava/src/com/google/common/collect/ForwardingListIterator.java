@@ -18,6 +18,9 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.ListIterator;
 
 /**
@@ -35,6 +38,7 @@ import java.util.ListIterator;
  * @author Mike Bostock
  * @since 2.0
  */
+@IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class ForwardingListIterator<E> extends ForwardingIterator<E>
     implements ListIterator<E> {

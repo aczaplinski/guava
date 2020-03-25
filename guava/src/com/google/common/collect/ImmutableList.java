@@ -46,6 +46,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.behavioral.IteratorPattern;
 import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * A {@link List} whose contents will never change, with many other important properties detailed at
@@ -61,6 +62,7 @@ import org.jpatterns.gof.creational.BuilderPattern;
  */
 @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @BuilderPattern.Product
+@DecoratorPattern.Component(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // we're overriding default serialization
 public abstract class ImmutableList<E> extends ImmutableCollection<E>

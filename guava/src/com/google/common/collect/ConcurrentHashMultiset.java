@@ -42,6 +42,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A multiset that supports concurrent modifications and that provides atomic versions of most
@@ -55,6 +57,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author mike nonemacher
  * @since 2.0
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> implements Serializable {
 
@@ -554,6 +557,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
     countMap.clear();
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   private class EntrySet extends AbstractMultiset<E>.EntrySet {
     @Override
