@@ -736,9 +736,10 @@ class LocalCache<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> 
     return (ValueReference<K, V>) UNSET;
   }
 
-  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   @NullObjectPattern.NullObject(validationErrorLevel = ValidationErrorLevel.ERROR)
   private enum NullEntry implements ReferenceEntry<Object, Object> {
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     INSTANCE;
 
     @Override

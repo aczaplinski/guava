@@ -62,8 +62,9 @@ public final class Functions {
     return ToStringFunction.INSTANCE;
   }
 
-  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   private enum ToStringFunction implements Function<Object, String> {
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     INSTANCE;
 
     @Override
@@ -85,8 +86,9 @@ public final class Functions {
     return (Function<E, E>) IdentityFunction.INSTANCE;
   }
 
-  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   private enum IdentityFunction implements Function<Object, Object> {
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     INSTANCE;
 
     @Override

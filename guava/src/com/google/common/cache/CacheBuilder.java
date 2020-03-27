@@ -206,9 +206,10 @@ public final class CacheBuilder<K, V> {
       };
 
   @ObserverPattern.ConcreteObserver(validationErrorLevel = ValidationErrorLevel.ERROR)
-  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   @NullObjectPattern.NullObject(validationErrorLevel = ValidationErrorLevel.ERROR)
   enum NullListener implements RemovalListener<Object, Object> {
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     INSTANCE;
 
     @Override

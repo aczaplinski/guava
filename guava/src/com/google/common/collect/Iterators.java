@@ -95,8 +95,9 @@ public final class Iterators {
    * This is an enum singleton rather than an anonymous class so ProGuard can figure out it's only
    * referenced by emptyModifiableIterator().
    */
-  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.NONE)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   private enum EmptyModifiableIterator implements Iterator<Object> {
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     INSTANCE;
 
     @Override
