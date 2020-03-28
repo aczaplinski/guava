@@ -20,6 +20,9 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import java.io.Serializable;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.StrategyPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
 
 /**
  * Equivalence applied on functional result.
@@ -27,6 +30,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Bob Lee
  * @since 10.0
  */
+@StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
 @Beta
 @GwtCompatible
 final class FunctionalEquivalence<F, T> extends Equivalence<F> implements Serializable {

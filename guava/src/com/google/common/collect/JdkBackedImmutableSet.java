@@ -17,6 +17,8 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * ImmutableSet implementation backed by a JDK HashSet, used to defend against apparent hash
@@ -25,6 +27,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(serializable = true)
 final class JdkBackedImmutableSet<E> extends IndexedImmutableSet<E> {
   private final Set<?> delegate;

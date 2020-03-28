@@ -50,6 +50,10 @@ import java.util.RandomAccess;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.AdapterPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /**
  * Static utility methods pertaining to {@link List} instances. Also see this class's counterparts
@@ -308,6 +312,7 @@ public final class Lists {
   }
 
   /** @see Lists#asList(Object, Object[]) */
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class OnePlusArrayList<E> extends AbstractList<E>
       implements Serializable, RandomAccess {
     final @Nullable E first;
@@ -334,6 +339,7 @@ public final class Lists {
   }
 
   /** @see Lists#asList(Object, Object, Object[]) */
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class TwoPlusArrayList<E> extends AbstractList<E>
       implements Serializable, RandomAccess {
     final @Nullable E first;
@@ -529,6 +535,7 @@ public final class Lists {
    *
    * @see Lists#transform
    */
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class TransformingSequentialList<F, T> extends AbstractSequentialList<T>
       implements Serializable {
     final List<F> fromList;
@@ -579,6 +586,7 @@ public final class Lists {
    *
    * @see Lists#transform
    */
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class TransformingRandomAccessList<F, T> extends AbstractList<T>
       implements RandomAccess, Serializable {
     final List<F> fromList;
@@ -661,6 +669,7 @@ public final class Lists {
         : new Partition<>(list, size);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class Partition<T> extends AbstractList<List<T>> {
     final List<T> list;
     final int size;
@@ -689,6 +698,7 @@ public final class Lists {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class RandomAccessPartition<T> extends Partition<T> implements RandomAccess {
     RandomAccessPartition(List<T> list, int size) {
       super(list, size);
@@ -719,6 +729,8 @@ public final class Lists {
   }
 
   @SuppressWarnings("serial") // serialized using ImmutableList serialization
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class StringAsImmutableList extends ImmutableList<Character> {
 
     private final String string;
@@ -760,6 +772,8 @@ public final class Lists {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class CharSequenceAsList extends AbstractList<Character> {
     private final CharSequence sequence;
 
@@ -802,6 +816,8 @@ public final class Lists {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class ReverseList<T> extends AbstractList<T> {
     private final List<T> forwardList;
 
@@ -940,6 +956,7 @@ public final class Lists {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class RandomAccessReverseList<T> extends ReverseList<T> implements RandomAccess {
     RandomAccessReverseList(List<T> forwardList) {
       super(forwardList);
@@ -1093,6 +1110,8 @@ public final class Lists {
     return wrapper.subList(fromIndex, toIndex);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class AbstractListWrapper<E> extends AbstractList<E> {
     final List<E> backingList;
 
@@ -1136,6 +1155,7 @@ public final class Lists {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class RandomAccessListWrapper<E> extends AbstractListWrapper<E>
       implements RandomAccess {
     RandomAccessListWrapper(List<E> backingList) {

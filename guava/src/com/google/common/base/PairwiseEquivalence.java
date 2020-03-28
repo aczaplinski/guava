@@ -18,10 +18,16 @@ import com.google.common.annotations.GwtCompatible;
 import java.io.Serializable;
 import java.util.Iterator;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.StrategyPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
 
+@StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
+@StrategyPattern.Context(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(serializable = true)
 final class PairwiseEquivalence<T> extends Equivalence<Iterable<T>> implements Serializable {
 
+  @StrategyPattern.StrategyField(validationErrorLevel = ValidationErrorLevel.ERROR)
   final Equivalence<? super T> elementEquivalence;
 
   PairwiseEquivalence(Equivalence<? super T> elementEquivalence) {

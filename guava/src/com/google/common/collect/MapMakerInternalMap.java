@@ -48,6 +48,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.locks.ReentrantLock;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.behavioral.StrategyPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * The concurrent hash map implementation built by {@link MapMaker}.
@@ -64,6 +68,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Doug Lea ({@code ConcurrentHashMap})
  */
 // TODO(kak/cpovirk): Consider removing @CanIgnoreReturnValue from this class.
+@BuilderPattern.Product
+@StrategyPattern.Context(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 @SuppressWarnings("GuardedBy") // TODO(b/35466881): Fix or suppress.
 class MapMakerInternalMap<
@@ -149,9 +155,11 @@ class MapMakerInternalMap<
   final int concurrencyLevel;
 
   /** Strategy for comparing keys. */
+  @StrategyPattern.StrategyField(validationErrorLevel = ValidationErrorLevel.ERROR)
   final Equivalence<Object> keyEquivalence;
 
   /** Strategy for handling entries and segments in a type-safe and efficient manner. */
+  @StrategyPattern.StrategyField(validationErrorLevel = ValidationErrorLevel.ERROR)
   final transient InternalEntryHelper<K, V, E, S> entryHelper;
 
   /**
@@ -277,6 +285,7 @@ class MapMakerInternalMap<
    * @param <E> the type of the {@link InternalEntry} entry implementation
    * @param <S> the type of the {@link Segment} entry implementation
    */
+  @StrategyPattern.Strategy(validationErrorLevel = ValidationErrorLevel.ERROR)
   interface InternalEntryHelper<
       K, V, E extends InternalEntry<K, V, E>, S extends Segment<K, V, E, S>> {
     /** The strength of the key type in each entry. */
@@ -412,6 +421,7 @@ class MapMakerInternalMap<
     }
 
     /** Concrete implementation of {@link InternalEntryHelper} for strong keys and strong values. */
+    @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, StrongKeyStrongValueEntry<K, V>, StrongKeyStrongValueSegment<K, V>> {
@@ -509,6 +519,7 @@ class MapMakerInternalMap<
     }
 
     /** Concrete implementation of {@link InternalEntryHelper} for strong keys and weak values. */
+    @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, StrongKeyWeakValueEntry<K, V>, StrongKeyWeakValueSegment<K, V>> {
@@ -589,6 +600,7 @@ class MapMakerInternalMap<
      * Concrete implementation of {@link InternalEntryHelper} for strong keys and {@link Dummy}
      * values.
      */
+    @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final class Helper<K>
         implements InternalEntryHelper<
             K, Dummy, StrongKeyDummyValueEntry<K>, StrongKeyDummyValueSegment<K>> {
@@ -694,6 +706,7 @@ class MapMakerInternalMap<
      * Concrete implementation of {@link InternalEntryHelper} for weak keys and {@link Dummy}
      * values.
      */
+    @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final class Helper<K>
         implements InternalEntryHelper<
             K, Dummy, WeakKeyDummyValueEntry<K>, WeakKeyDummyValueSegment<K>> {
@@ -778,6 +791,7 @@ class MapMakerInternalMap<
     }
 
     /** Concrete implementation of {@link InternalEntryHelper} for weak keys and strong values. */
+    @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, WeakKeyStrongValueEntry<K, V>, WeakKeyStrongValueSegment<K, V>> {
@@ -880,6 +894,7 @@ class MapMakerInternalMap<
     }
 
     /** Concrete implementation of {@link InternalEntryHelper} for weak keys and weak values. */
+    @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, WeakKeyWeakValueEntry<K, V>, WeakKeyWeakValueSegment<K, V>> {
@@ -2496,6 +2511,7 @@ class MapMakerInternalMap<
 
   // Iterator Support
 
+  @IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   abstract class HashIterator<T> implements Iterator<T> {
 
     int nextSegmentIndex;
@@ -2604,6 +2620,7 @@ class MapMakerInternalMap<
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class KeyIterator extends HashIterator<K> {
 
     @Override
@@ -2612,6 +2629,7 @@ class MapMakerInternalMap<
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class ValueIterator extends HashIterator<V> {
 
     @Override
@@ -2667,6 +2685,7 @@ class MapMakerInternalMap<
     }
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class EntryIterator extends HashIterator<Entry<K, V>> {
 
     @Override
@@ -2709,6 +2728,7 @@ class MapMakerInternalMap<
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   final class Values extends AbstractCollection<V> {
 
@@ -2751,6 +2771,7 @@ class MapMakerInternalMap<
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   final class EntrySet extends SafeToArraySet<Entry<K, V>> {
 
@@ -2800,6 +2821,7 @@ class MapMakerInternalMap<
     }
   }
 
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private abstract static class SafeToArraySet<E> extends AbstractSet<E> {
     // super.toArray() may misbehave if size() is inaccurate, at least on old versions of Android.
     // https://code.google.com/p/android/issues/detail?id=36519 / http://r.android.com/47508

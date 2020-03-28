@@ -31,6 +31,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.BuilderPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
 
 /**
  * A builder of {@link ConcurrentMap} instances that can have keys or values automatically wrapped
@@ -85,6 +88,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+@BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible(emulated = true)
 public final class MapMaker {
   private static final int DEFAULT_INITIAL_CAPACITY = 16;
@@ -247,7 +251,9 @@ public final class MapMaker {
    * <p>{@link MapMakerInternalMap} can optimize for memory usage in this case; see {@link
    * MapMakerInternalMap#createWithDummyValues}.
    */
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   enum Dummy {
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     VALUE
   }
 

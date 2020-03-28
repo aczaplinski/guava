@@ -21,6 +21,9 @@ import com.google.errorprone.annotations.ForOverride;
 import java.io.Serializable;
 import java.util.function.BiPredicate;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.StrategyPattern;
+import org.jpatterns.gof.creational.SingletonPattern;
 
 /**
  * A strategy for determining whether two instances are considered equivalent, and for computing
@@ -33,6 +36,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @since 10.0 (<a href="https://github.com/google/guava/wiki/Compatibility">mostly
  *     source-compatible</a> since 4.0)
  */
+@StrategyPattern.Strategy(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 public abstract class Equivalence<T> implements BiPredicate<T, T> {
   /** Constructor for use by subclasses. */
@@ -334,9 +338,14 @@ public abstract class Equivalence<T> implements BiPredicate<T, T> {
     return Identity.INSTANCE;
   }
 
+  @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class Equals extends Equivalence<Object> implements Serializable {
 
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final Equals INSTANCE = new Equals();
+
+    private Equals() { }
 
     @Override
     protected boolean doEquivalent(Object a, Object b) {
@@ -355,9 +364,14 @@ public abstract class Equivalence<T> implements BiPredicate<T, T> {
     private static final long serialVersionUID = 1;
   }
 
+  @StrategyPattern.ConcreteStrategy(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class Identity extends Equivalence<Object> implements Serializable {
 
+    @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
     static final Identity INSTANCE = new Identity();
+
+    private Identity() { }
 
     @Override
     protected boolean doEquivalent(Object a, Object b) {
