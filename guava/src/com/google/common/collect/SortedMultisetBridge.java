@@ -17,6 +17,9 @@
 package com.google.common.collect;
 
 import com.google.common.annotations.GwtIncompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.SortedSet;
 
 /**
@@ -26,6 +29,7 @@ import java.util.SortedSet;
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtIncompatible
 interface SortedMultisetBridge<E> extends Multiset<E> {
   @Override

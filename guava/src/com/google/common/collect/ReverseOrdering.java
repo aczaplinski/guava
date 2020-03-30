@@ -22,8 +22,11 @@ import com.google.common.annotations.GwtCompatible;
 import java.io.Serializable;
 import java.util.Iterator;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.structural.DecoratorPattern;
 
 /** An ordering that uses the reverse of a given order. */
+@DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible(serializable = true)
 final class ReverseOrdering<T> extends Ordering<T> implements Serializable {
   final Ordering<? super T> forwardOrder;

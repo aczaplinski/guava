@@ -26,12 +26,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Spliterator;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Skeletal, implementation-agnostic implementation of the {@link Table} interface.
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 abstract class AbstractTable<R, C, V> implements Table<R, C, V> {
 

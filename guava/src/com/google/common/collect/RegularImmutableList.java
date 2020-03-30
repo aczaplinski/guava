@@ -18,6 +18,10 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.VisibleForTesting;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.AdapterPattern;
+
 import java.util.Spliterator;
 import java.util.Spliterators;
 
@@ -26,6 +30,8 @@ import java.util.Spliterators;
  *
  * @author Kevin Bourrillion
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+@AdapterPattern.Adapter(validationErrorLevel = ValidationErrorLevel.NONE)
 @GwtCompatible(serializable = true, emulated = true)
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 class RegularImmutableList<E> extends ImmutableList<E> {

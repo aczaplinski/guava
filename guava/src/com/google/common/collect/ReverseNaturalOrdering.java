@@ -19,13 +19,18 @@ package com.google.common.collect;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.annotations.GwtCompatible;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.SingletonPattern;
+
 import java.io.Serializable;
 import java.util.Iterator;
 
 /** An ordering that uses the reverse of the natural order of the values. */
+@SingletonPattern.Singleton(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(serializable = true)
 @SuppressWarnings({"unchecked", "rawtypes"}) // TODO(kevinb): the right way to explain this??
 final class ReverseNaturalOrdering extends Ordering<Comparable> implements Serializable {
+  @SingletonPattern.SingletonField(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final ReverseNaturalOrdering INSTANCE = new ReverseNaturalOrdering();
 
   @Override

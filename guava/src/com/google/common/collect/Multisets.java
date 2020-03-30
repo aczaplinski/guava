@@ -43,6 +43,8 @@ import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jpatterns.core.ValidationErrorLevel;
 import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.DecoratorPattern;
+import org.jpatterns.gof.structural.ProxyPattern;
 
 /**
  * Provides static utility methods for creating and working with {@link Multiset} instances.
@@ -120,6 +122,8 @@ public final class Multisets {
     return checkNotNull(multiset);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class UnmodifiableMultiset<E> extends ForwardingMultiset<E> implements Serializable {
     final Multiset<? extends E> delegate;
 
@@ -310,6 +314,7 @@ public final class Multisets {
     return new FilteredMultiset<E>(unfiltered, predicate);
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class FilteredMultiset<E> extends ViewMultiset<E> {
     final Multiset<E> unfiltered;
     final Predicate<? super E> predicate;
@@ -1056,6 +1061,7 @@ public final class Multisets {
     return new MultisetIteratorImpl<E>(multiset, multiset.entrySet().iterator());
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   static final class MultisetIteratorImpl<E> implements Iterator<E> {
     private final Multiset<E> multiset;
     private final Iterator<Entry<E>> entryIterator;
@@ -1157,6 +1163,7 @@ public final class Multisets {
    * An {@link AbstractMultiset} with additional default implementations, some of them linear-time
    * implementations in terms of {@code elementSet} and {@code entrySet}.
    */
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private abstract static class ViewMultiset<E> extends AbstractMultiset<E> {
     @Override
     public int size() {

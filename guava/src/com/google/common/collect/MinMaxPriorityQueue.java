@@ -42,6 +42,9 @@ import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.creational.BuilderPattern;
 
 /**
  * A double-ended priority queue, which provides constant-time access to both its least element and
@@ -96,6 +99,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Torbjorn Gannholm
  * @since 8.0
  */
+@BuilderPattern.Product
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.NONE)
 @Beta
 @GwtCompatible
 public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
@@ -153,6 +158,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    *     Queue<Integer>} but not a {@code Queue<Object>}).
    * @since 8.0
    */
+  @BuilderPattern.ConcreteBuilder(validationErrorLevel = ValidationErrorLevel.NONE)
   @Beta
   public static final class Builder<B> {
     /*
@@ -745,6 +751,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    *
    * <p>If the underlying queue is modified during iteration an exception will be thrown.
    */
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private class QueueIterator implements Iterator<E> {
     private int cursor = -1;
     private int nextCursor = -1;

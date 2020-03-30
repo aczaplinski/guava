@@ -1679,6 +1679,7 @@ public final class Multimaps {
     return builder.build();
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class Keys<K, V> extends AbstractMultiset<K> {
     @Weak final Multimap<K, V> multimap;
 

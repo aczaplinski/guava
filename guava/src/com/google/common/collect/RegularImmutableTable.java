@@ -25,12 +25,15 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An implementation of {@link ImmutableTable} holding an arbitrary number of cells.
  *
  * @author Gregory Kick
  */
+@IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
   RegularImmutableTable() {}
@@ -42,6 +45,7 @@ abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     return isEmpty() ? ImmutableSet.<Cell<R, C, V>>of() : new CellSet();
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   private final class CellSet extends IndexedImmutableSet<Cell<R, C, V>> {
     @Override
@@ -77,6 +81,7 @@ abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     return isEmpty() ? ImmutableList.<V>of() : new Values();
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   private final class Values extends ImmutableList<V> {
     @Override

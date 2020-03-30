@@ -1433,6 +1433,8 @@ public final class Maps {
   }
 
   /** @see Multimaps#unmodifiableEntries */
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class UnmodifiableEntries<K, V> extends ForwardingCollection<Entry<K, V>> {
     private final Collection<Entry<K, V>> entries;
 
@@ -1464,6 +1466,8 @@ public final class Maps {
   }
 
   /** @see Maps#unmodifiableEntrySet(Set) */
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
+  @DecoratorPattern.ConcreteDecorator(validationErrorLevel = ValidationErrorLevel.NONE)
   static class UnmodifiableEntrySet<K, V> extends UnmodifiableEntries<K, V>
       implements Set<Entry<K, V>> {
     UnmodifiableEntrySet(Set<Entry<K, V>> entries) {
@@ -2751,6 +2755,7 @@ public final class Maps {
     }
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class FilteredMapValues<K, V> extends Maps.Values<K, V> {
     final Map<K, V> unfiltered;
     final Predicate<? super Entry<K, V>> predicate;

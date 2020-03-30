@@ -16,11 +16,15 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.Immutable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /** A {@code RegularImmutableTable} optimized for sparse data. */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 @Immutable(containerOf = {"R", "C", "V"})
 final class SparseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> {

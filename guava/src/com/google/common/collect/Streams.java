@@ -46,6 +46,8 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Static utility methods related to {@code Stream} instances.
@@ -723,6 +725,7 @@ public final class Streams {
     R apply(T from, long index);
   }
 
+  @IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private abstract static class MapWithIndexSpliterator<
           F extends Spliterator<?>, R, S extends MapWithIndexSpliterator<F, R, S>>
       implements Spliterator<R> {

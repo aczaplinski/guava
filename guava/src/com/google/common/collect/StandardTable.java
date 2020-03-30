@@ -65,6 +65,7 @@ import org.jpatterns.gof.behavioral.IteratorPattern;
  *
  * @author Jared Levy
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializable {
   @GwtTransient final Map<R, Map<C, V>> backingMap;
@@ -202,6 +203,7 @@ class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializa
    * Abstract set whose {@code isEmpty()} returns whether the table is empty and whose {@code
    * clear()} clears all table mappings.
    */
+  @IteratorPattern.Aggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   private abstract class TableSet<T> extends ImprovedAbstractSet<T> {
     @Override
@@ -234,6 +236,7 @@ class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializa
     return new CellIterator();
   }
 
+  @IteratorPattern.ConcreteIterator(validationErrorLevel = ValidationErrorLevel.ERROR)
   private class CellIterator implements Iterator<Cell<R, C, V>> {
     final Iterator<Entry<R, Map<C, V>>> rowIterator = backingMap.entrySet().iterator();
     @Nullable Entry<R, Map<C, V>> rowEntry;
@@ -637,6 +640,7 @@ class StandardTable<R, C, V> extends AbstractTable<R, C, V> implements Serializa
     return (result == null) ? columnKeySet = new ColumnKeySet() : result;
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @WeakOuter
   private class ColumnKeySet extends TableSet<C> {
     @Override

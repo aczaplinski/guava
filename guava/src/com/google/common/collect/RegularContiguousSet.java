@@ -24,12 +24,15 @@ import com.google.common.annotations.GwtIncompatible;
 import java.io.Serializable;
 import java.util.Collection;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An implementation of {@link ContiguousSet} that contains one or more elements.
  *
  * @author Gregory Kick
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 @SuppressWarnings("unchecked") // allow ungenerified Comparable types
 final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> {
