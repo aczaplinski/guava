@@ -32,6 +32,8 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.creational.AbstractFactoryPattern;
 
 /**
  * Implementation of {@code Table} whose row keys and column keys are ordered by their natural
@@ -69,6 +71,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
   private final Comparator<? super C> columnComparator;
 
+  @AbstractFactoryPattern.ConcreteFactory(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class Factory<C, V> implements Supplier<TreeMap<C, V>>, Serializable {
     final Comparator<? super C> comparator;
 
@@ -76,6 +79,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
       this.comparator = comparator;
     }
 
+    @AbstractFactoryPattern.FactoryMethod(validationErrorLevel = ValidationErrorLevel.NONE)
     @Override
     public TreeMap<C, V> get() {
       return new TreeMap<>(comparator);

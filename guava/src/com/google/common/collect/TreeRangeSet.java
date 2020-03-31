@@ -31,6 +31,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * An implementation of {@link RangeSet} backed by a {@link TreeMap}.
@@ -93,6 +95,7 @@ public class TreeRangeSet<C extends Comparable<?>> extends AbstractRangeSet<C>
         : result;
   }
 
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   final class AsRanges extends ForwardingCollection<Range<C>> implements Set<Range<C>> {
 
     final Collection<Range<C>> delegate;

@@ -18,6 +18,9 @@ package com.google.common.collect;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Function;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+
 import java.util.ListIterator;
 
 /**
@@ -26,6 +29,7 @@ import java.util.ListIterator;
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.Iterator(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible
 abstract class TransformedListIterator<F, T> extends TransformedIterator<F, T>
     implements ListIterator<T> {

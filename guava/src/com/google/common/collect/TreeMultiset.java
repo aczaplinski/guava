@@ -37,6 +37,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.ObjIntConsumer;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * A multiset which maintains the ordering of its elements, according to either their natural order
@@ -56,6 +58,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 public final class TreeMultiset<E> extends AbstractSortedMultiset<E> implements Serializable {
 

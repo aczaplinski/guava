@@ -49,6 +49,9 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
+import org.jpatterns.gof.structural.ProxyPattern;
 
 /**
  * Synchronized collection views. The returned synchronized collection views are serializable if the
@@ -66,6 +69,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 final class Synchronized {
   private Synchronized() {}
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   static class SynchronizedObject implements Serializable {
     final Object delegate;
     final Object mutex;
@@ -108,6 +112,8 @@ final class Synchronized {
     return new SynchronizedCollection<E>(collection, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @VisibleForTesting
   static class SynchronizedCollection<E> extends SynchronizedObject implements Collection<E> {
     private SynchronizedCollection(Collection<E> delegate, @Nullable Object mutex) {
@@ -252,6 +258,8 @@ final class Synchronized {
     return new SynchronizedSet<E>(set, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class SynchronizedSet<E> extends SynchronizedCollection<E> implements Set<E> {
 
     SynchronizedSet(Set<E> delegate, @Nullable Object mutex) {
@@ -287,6 +295,8 @@ final class Synchronized {
     return new SynchronizedSortedSet<E>(set, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   static class SynchronizedSortedSet<E> extends SynchronizedSet<E> implements SortedSet<E> {
     SynchronizedSortedSet(SortedSet<E> delegate, @Nullable Object mutex) {
       super(delegate, mutex);
@@ -348,6 +358,8 @@ final class Synchronized {
         : new SynchronizedList<E>(list, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class SynchronizedList<E> extends SynchronizedCollection<E> implements List<E> {
     SynchronizedList(List<E> delegate, @Nullable Object mutex) {
       super(delegate, mutex);
@@ -458,6 +470,8 @@ final class Synchronized {
     private static final long serialVersionUID = 0;
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class SynchronizedRandomAccessList<E> extends SynchronizedList<E>
       implements RandomAccess {
     SynchronizedRandomAccessList(List<E> list, @Nullable Object mutex) {
@@ -474,6 +488,8 @@ final class Synchronized {
     return new SynchronizedMultiset<E>(multiset, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class SynchronizedMultiset<E> extends SynchronizedCollection<E>
       implements Multiset<E> {
     transient @Nullable Set<E> elementSet;
@@ -570,6 +586,7 @@ final class Synchronized {
     return new SynchronizedMultimap<>(multimap, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class SynchronizedMultimap<K, V> extends SynchronizedObject
       implements Multimap<K, V> {
     transient @Nullable Set<K> keySet;
@@ -764,6 +781,7 @@ final class Synchronized {
     return new SynchronizedListMultimap<>(multimap, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class SynchronizedListMultimap<K, V> extends SynchronizedMultimap<K, V>
       implements ListMultimap<K, V> {
     SynchronizedListMultimap(ListMultimap<K, V> delegate, @Nullable Object mutex) {
@@ -806,6 +824,7 @@ final class Synchronized {
     return new SynchronizedSetMultimap<>(multimap, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class SynchronizedSetMultimap<K, V> extends SynchronizedMultimap<K, V>
       implements SetMultimap<K, V> {
     transient @Nullable Set<Entry<K, V>> entrySet;
@@ -861,6 +880,7 @@ final class Synchronized {
     return new SynchronizedSortedSetMultimap<>(multimap, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class SynchronizedSortedSetMultimap<K, V> extends SynchronizedSetMultimap<K, V>
       implements SortedSetMultimap<K, V> {
     SynchronizedSortedSetMultimap(SortedSetMultimap<K, V> delegate, @Nullable Object mutex) {
@@ -925,6 +945,8 @@ final class Synchronized {
     }
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class SynchronizedAsMapEntries<K, V>
       extends SynchronizedSet<Entry<K, Collection<V>>> {
     SynchronizedAsMapEntries(Set<Entry<K, Collection<V>>> delegate, @Nullable Object mutex) {
@@ -1022,6 +1044,7 @@ final class Synchronized {
     return new SynchronizedMap<>(map, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class SynchronizedMap<K, V> extends SynchronizedObject implements Map<K, V> {
     transient @Nullable Set<K> keySet;
     transient @Nullable Collection<V> values;
@@ -1233,6 +1256,7 @@ final class Synchronized {
     return new SynchronizedSortedMap<>(sortedMap, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   static class SynchronizedSortedMap<K, V> extends SynchronizedMap<K, V>
       implements SortedMap<K, V> {
 
@@ -1297,6 +1321,7 @@ final class Synchronized {
     return new SynchronizedBiMap<>(bimap, mutex, null);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   @VisibleForTesting
   static class SynchronizedBiMap<K, V> extends SynchronizedMap<K, V>
       implements BiMap<K, V>, Serializable {
@@ -1344,6 +1369,7 @@ final class Synchronized {
     private static final long serialVersionUID = 0;
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static class SynchronizedAsMap<K, V> extends SynchronizedMap<K, Collection<V>> {
     transient @Nullable Set<Entry<K, Collection<V>>> asMapEntrySet;
     transient @Nullable Collection<Collection<V>> asMapValues;
@@ -1389,6 +1415,8 @@ final class Synchronized {
     private static final long serialVersionUID = 0;
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class SynchronizedAsMapValues<V> extends SynchronizedCollection<Collection<V>> {
     SynchronizedAsMapValues(Collection<Collection<V>> delegate, @Nullable Object mutex) {
       super(delegate, mutex);
@@ -1408,6 +1436,8 @@ final class Synchronized {
     private static final long serialVersionUID = 0;
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   @GwtIncompatible // NavigableSet
   @VisibleForTesting
   static class SynchronizedNavigableSet<E> extends SynchronizedSortedSet<E>
@@ -1544,6 +1574,7 @@ final class Synchronized {
     return new SynchronizedNavigableMap<>(navigableMap, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // NavigableMap
   @VisibleForTesting
   static class SynchronizedNavigableMap<K, V> extends SynchronizedSortedMap<K, V>
@@ -1732,6 +1763,7 @@ final class Synchronized {
     return new SynchronizedEntry<>(entry, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   @GwtIncompatible // works but is needed only for NavigableMap
   private static class SynchronizedEntry<K, V> extends SynchronizedObject implements Entry<K, V> {
 
@@ -1787,6 +1819,8 @@ final class Synchronized {
     return (queue instanceof SynchronizedQueue) ? queue : new SynchronizedQueue<E>(queue, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static class SynchronizedQueue<E> extends SynchronizedCollection<E> implements Queue<E> {
 
     SynchronizedQueue(Queue<E> delegate, @Nullable Object mutex) {
@@ -1840,6 +1874,8 @@ final class Synchronized {
     return new SynchronizedDeque<E>(deque, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
+  @IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
   private static final class SynchronizedDeque<E> extends SynchronizedQueue<E> implements Deque<E> {
 
     SynchronizedDeque(Deque<E> delegate, @Nullable Object mutex) {
@@ -1977,6 +2013,7 @@ final class Synchronized {
     return new SynchronizedTable<>(table, mutex);
   }
 
+  @ProxyPattern.Proxy(validationErrorLevel = ValidationErrorLevel.NONE)
   private static final class SynchronizedTable<R, C, V> extends SynchronizedObject
       implements Table<R, C, V> {
 

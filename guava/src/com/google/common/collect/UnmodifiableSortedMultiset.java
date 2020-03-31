@@ -21,6 +21,8 @@ import com.google.common.collect.Multisets.UnmodifiableMultiset;
 import java.util.Comparator;
 import java.util.NavigableSet;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jpatterns.core.ValidationErrorLevel;
+import org.jpatterns.gof.behavioral.IteratorPattern;
 
 /**
  * Implementation of {@link Multisets#unmodifiableSortedMultiset(SortedMultiset)}, split out into
@@ -29,6 +31,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Louis Wasserman
  */
+@IteratorPattern.ConcreteAggregate(validationErrorLevel = ValidationErrorLevel.ERROR)
 @GwtCompatible(emulated = true)
 final class UnmodifiableSortedMultiset<E> extends UnmodifiableMultiset<E>
     implements SortedMultiset<E> {
