@@ -30,16 +30,26 @@ import org.junit.runners.JUnit4;
  * against a sorted graph so as to cover {@link MapRetrievalCache}.
  */
 @RunWith(JUnit4.class)
-public class StandardSimpleDirectedSortedNetworkTest extends StandardSimpleDirectedNetworkTest {
+public class StandardSimpleDirectedSortedNetworkTest extends AbstractStandardDirectedNetworkTest {
 
   @Override
-  public MutableNetwork<Integer, String> createGraph() {
+  MutableNetwork<Integer, String> createGraph() {
     return NetworkBuilder.directed()
         .allowsParallelEdges(false)
         .allowsSelfLoops(false)
         .edgeOrder(sorted(Ordering.natural()))
         .nodeOrder(sorted(Ordering.natural()))
         .build();
+  }
+
+  @Override
+  void addNode(Integer n) {
+    networkAsMutableNetwork.addNode(n);
+  }
+
+  @Override
+  void addEdge(Integer n1, Integer n2, String e) {
+    networkAsMutableNetwork.addEdge(n1, n2, e);
   }
 
   @Override

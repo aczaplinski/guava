@@ -106,7 +106,7 @@ public abstract class AbstractNetworkTest {
       "Reusing an existing edge to connect different nodes succeeded";
 
   /** Creates and returns an instance of the graph to be tested. */
-  public abstract Network<Integer, String> createGraph();
+  abstract Network<Integer, String> createGraph();
 
   /**
    * A proxy method that adds the node {@code n} to the graph being tested. In case of Immutable
@@ -121,10 +121,6 @@ public abstract class AbstractNetworkTest {
    * includes this edge.
    */
   abstract void addEdge(Integer n1, Integer n2, String e);
-
-  final void addEdge(EndpointPair<Integer> endpoints, String e) {
-    addEdge(endpoints.nodeU(), endpoints.nodeV(), e);
-  }
 
   final boolean graphIsMutable() {
     return networkAsMutableNetwork != null;

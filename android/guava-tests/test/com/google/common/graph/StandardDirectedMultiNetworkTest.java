@@ -26,9 +26,10 @@ import org.junit.runners.JUnit4;
 
 /** Tests for a directed {@link StandardMutableNetwork} allowing parallel edges and self-loops. */
 @RunWith(JUnit4.class)
-public class StandardDirectedMultiNetworkTest extends StandardDirectedNetworkTest {
+public class StandardDirectedMultiNetworkTest extends AbstractStandardDirectedNetworkTest {
+
   @Override
-  public MutableNetwork<Integer, String> createGraph() {
+  MutableNetwork<Integer, String> createGraph() {
     return NetworkBuilder.directed().allowsParallelEdges(true).allowsSelfLoops(true).build();
   }
 
